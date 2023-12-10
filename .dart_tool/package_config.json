@@ -68,6 +68,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "flutter_staggered_grid_view",
+      "rootUri": "file:///C:/Users/USER/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_staggered_grid_view-0.7.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///C:/src/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -78,6 +84,12 @@
       "rootUri": "file:///C:/src/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "3.2"
+    },
+    {
+      "name": "homepage",
+      "rootUri": "../homepage",
+      "packageUri": "lib/",
+      "languageVersion": "3.1"
     },
     {
       "name": "http",
@@ -290,7 +302,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2023-12-10T13:45:53.625269Z",
+  "generated": "2023-12-10T13:53:21.060447Z",
   "generator": "pub",
   "generatorVersion": "3.2.2"
 }

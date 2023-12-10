@@ -1,3 +1,9 @@
-2023/12/08-12:07:59.802 72c8 Reusing MANIFEST C:\Users\USER\AppData\Local\Temp\flutter_tools.b9bf5347\flutter_tools_chrome_device.903d29ad\Default\Session Storage/MANIFEST-000001
-2023/12/08-12:07:59.847 72c8 Recovering log #3
-2023/12/08-12:07:59.869 72c8 Reusing old log C:\Users\USER\AppData\Local\Temp\flutter_tools.b9bf5347\flutter_tools_chrome_device.903d29ad\Default\Session Storage/000003.log 
+<<<<<<< HEAD
+2023/12/10-14:10:20.435 a994 Reusing MANIFEST C:\Users\USER\AppData\Local\Temp\flutter_tools.f643dadd\flutter_tools_chrome_device.5d35ab1c\Default\Session Storage/MANIFEST-000001
+2023/12/10-14:10:20.436 a994 Recovering log #3
+2023/12/10-14:10:20.450 a994 Reusing old log C:\Users\USER\AppData\Local\Temp\flutter_tools.f643dadd\flutter_tools_chrome_device.5d35ab1c\Default\Session Storage/000003.log 
+=======
+2023/12/10-14:36:48.721 6234 Reusing MANIFEST C:\Users\USER\AppData\Local\Temp\flutter_tools.e0d4005b\flutter_tools_chrome_device.5ea55ae2\Default\Session Storage/MANIFEST-000001
+2023/12/10-14:36:48.729 6234 Recovering log #3
+2023/12/10-14:36:48.732 6234 Reusing old log C:\Users\USER\AppData\Local\Temp\flutter_tools.e0d4005b\flutter_tools_chrome_device.5ea55ae2\Default\Session Storage/000003.log 
+>>>>>>> b00edade217526a539ad190bce846ffa2da4330f

@@ -1,3 +1,13 @@
-2023/12/08-12:07:59.636 5b50 Reusing MANIFEST C:\Users\USER\AppData\Local\Temp\flutter_tools.b9bf5347\flutter_tools_chrome_device.903d29ad\Default\Site Characteristics Database/MANIFEST-000001
-2023/12/08-12:07:59.649 5b50 Recovering log #3
-2023/12/08-12:07:59.650 5b50 Reusing old log C:\Users\USER\AppData\Local\Temp\flutter_tools.b9bf5347\flutter_tools_chrome_device.903d29ad\Default\Site Characteristics Database/000003.log 
+<<<<<<< HEAD
+2023/12/10-14:10:20.236 e80 Reusing MANIFEST C:\Users\USER\AppData\Local\Temp\flutter_tools.f643dadd\flutter_tools_chrome_device.5d35ab1c\Default\Site Characteristics Database/MANIFEST-000001
+2023/12/10-14:10:20.241 e80 Recovering log #3
+2023/12/10-14:10:20.242 e80 Reusing old log C:\Users\USER\AppData\Local\Temp\flutter_tools.f643dadd\flutter_tools_chrome_device.5d35ab1c\Default\Site Characteristics Database/000003.log 
+=======
+2023/12/10-14:36:48.499 653c Reusing MANIFEST C:\Users\USER\AppData\Local\Temp\flutter_tools.e0d4005b\flutter_tools_chrome_device.5ea55ae2\Default\Site Characteristics Database/MANIFEST-000001
+2023/12/10-14:36:48.502 653c Recovering log #3
+2023/12/10-14:36:48.502 653c Level-0 table #6: started
+2023/12/10-14:36:48.505 653c Level-0 table #6: 564 bytes OK
+2023/12/10-14:36:48.505 653c Recovering log #6
+2023/12/10-14:36:48.506 653c Reusing old log C:\Users\USER\AppData\Local\Temp\flutter_tools.e0d4005b\flutter_tools_chrome_device.5ea55ae2\Default\Site Characteristics Database/000006.log 
+2023/12/10-14:36:48.508 653c Delete type=0 #3
+>>>>>>> b00edade217526a539ad190bce846ffa2da4330f
