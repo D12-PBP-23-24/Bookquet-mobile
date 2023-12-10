@@ -3,6 +3,8 @@ import 'package:homepage/screens/homepage.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:homepage/book_detail_page.dart';
+import 'package:bookquet_mobile/screens/login.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
             useMaterial3: true,
         ),
-      home: MyHomePage()),
+      home: LoginPage()),
     );
   }
 }
@@ -58,8 +60,28 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: [
           IconButton(
             icon: Icon(Icons.exit_to_app),
-            onPressed: () {
-              //TODO: Routing Carrisa
+            onPressed: () async {
+              // Mengambil instance CookieRequest dari Provider
+              CookieRequest request = Provider.of<CookieRequest>(context, listen: false);
+
+              // Melakukan logout
+              final response = await request.logout("http://localhost:8000/auth/logout/");
+
+              String message = response["message"];
+              if (response['status']) {
+                String uname = response["username"];
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("$message Sampai jumpa, $uname."),
+                ));
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("$message"),
+                ));
+              }
             },
           ),
         ],
