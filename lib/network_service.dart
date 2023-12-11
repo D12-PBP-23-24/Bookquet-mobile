@@ -22,6 +22,7 @@ class NetworkService {
         print("masuk1");
         return true; // Book added to read-later successfully
       } else {
+        print("masuk2");
         return false; // Failed to add book to read-later
       }
     } catch (e) {
