@@ -1,5 +1,4 @@
-2023/12/11-08:46:22.906 1e1c Log #3: 7 ops saved to Table #4 OK
-2023/12/11-08:46:22.907 1e1c Archiving C:\Users\edber\AppData\Local\Temp\flutter_tools.e3b3d826\flutter_tools_chrome_device.ebf70bfa\Default\Site Characteristics Database/000003.log: OK
-2023/12/11-08:46:22.907 1e1c Table #4: 7 entries OK
-2023/12/11-08:46:22.908 1e1c Archiving C:\Users\edber\AppData\Local\Temp\flutter_tools.e3b3d826\flutter_tools_chrome_device.ebf70bfa\Default\Site Characteristics Database/MANIFEST-000001: OK
-2023/12/11-08:46:22.934 1e1c **** Repaired leveldb C:\Users\edber\AppData\Local\Temp\flutter_tools.e3b3d826\flutter_tools_chrome_device.ebf70bfa\Default\Site Characteristics Database; recovered 1 files; 312 bytes. Some data may have been lost. ****
+2023/12/11-16:42:44.763 1f30 Reusing MANIFEST C:\Users\edber\AppData\Local\Temp\flutter_tools.142cd327\flutter_tools_chrome_device.cc28e7f4\Default\Site Characteristics Database/MANIFEST-000001
+2023/12/11-16:42:44.766 1f30 Recovering log #6
+2023/12/11-16:42:44.766 1f30 Reusing old log C:\Users\edber\AppData\Local\Temp\flutter_tools.142cd327\flutter_tools_chrome_device.cc28e7f4\Default\Site Characteristics Database/000006.log 
+2023/12/11-16:42:44.767 1f30 Delete type=0 #3

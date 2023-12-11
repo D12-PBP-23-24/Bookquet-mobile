@@ -7,7 +7,7 @@ import 'modelsReadLater.dart';
 import 'pbp_django_auth.dart';
 import 'read_later_list_screen.dart';
 
-class HomePage extends StatelessWidget {
+class  HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

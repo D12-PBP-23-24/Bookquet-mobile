@@ -1,5 +1,8 @@
-import 'package:bookquet_mobile/homepageEdbert.dart';
-import 'package:bookquet_mobile/read_later_list_screen.dart';
+import 'package:bookquet_mobile/homepage.dart';
+import 'package:bookquet_mobile/main.dart';
+
+import 'homepageEdbert.dart';
+import 'read_later_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -18,19 +21,19 @@ Widget build(BuildContext context) {
         theme: ThemeData(
             primarySwatch: Colors.blue,
     ),
-    home: const LoginPage(),
+    home: const LoginPage2(),
     );
     }
 }
 
-class LoginPage extends StatefulWidget {
-    const LoginPage({super.key});
+class LoginPage2 extends StatefulWidget {
+    const LoginPage2({super.key});
 
     @override
     _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage2> {
     final TextEditingController _usernameController = TextEditingController();
     final TextEditingController _passwordController = TextEditingController();
 
@@ -80,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                                     String uname = response['username'];
                                     Navigator.pushReplacement(
                                         context,
-                                        MaterialPageRoute(builder: (context) => HomePage()),
+                                        MaterialPageRoute(builder: (context) => MyHomePage()),
                                     );
                                     ScaffoldMessenger.of(context)
                                         ..hideCurrentSnackBar()
