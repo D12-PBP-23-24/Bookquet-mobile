@@ -1,3 +1,4 @@
+import 'package:bookquet_mobile/profile.dart';
 import 'package:flutter/material.dart';
 import 'pbp_django_auth.dart';
 import 'package:provider/provider.dart';

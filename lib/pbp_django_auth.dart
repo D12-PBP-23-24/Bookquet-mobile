@@ -126,6 +126,7 @@ class CookieRequest {
     // return response.body;
     return json.decode(response.body);
   }
+  
   // tambah sendiri
   Future<dynamic> delete(String url) async {
     await init(); // Ensure that the initialization has happened
