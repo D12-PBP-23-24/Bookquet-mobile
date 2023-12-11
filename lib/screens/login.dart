@@ -94,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                             String password = _passwordController.text;
 
                             final response = await request.login(
-                              "http://localhost:8000/auth/login/",
+                              "http://127.0.0.1:8000/auth/login/",
                               {
                                 'username': username,
                                 'password': password,
@@ -142,30 +142,30 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         SizedBox(height: 15),
-                        // Text(
-                        //   "Don't have an account yet?",
-                        //   style: TextStyle(color: Colors.green),
-                        // ),
-                        // TextButton(
-                        //   onPressed: () {
-                        //     // Navigasi ke halaman pendaftaran
-                        //     Navigator.pushReplacement(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //         builder: (context) => RegisterPage(),
-                        //       ),
-                        //     );
-                        //   },
-                        //   style: TextButton.styleFrom(
-                        //     primary: Colors.green, // Warna teks tombol
-                        //   ),
-                        //   child: Text(
-                        //     'Register Now',
-                        //     style: TextStyle(
-                        //       fontWeight: FontWeight.bold,
-                        //     ),
-                        //   ),
-                        // ),
+                        Text(
+                          "Don't have an account yet?",
+                          style: TextStyle(color: Colors.green),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            // Navigasi ke halaman pendaftaran
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => RegisterPage(),
+                              ),
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            primary: Colors.green, // Warna teks tombol
+                          ),
+                          child: Text(
+                            'Register Now',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
