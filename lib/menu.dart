@@ -39,26 +39,3 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-// ...
-// // statement if sebelumnya
-// // tambahkan else if baru seperti di bawah ini
-// else if (item.name == "Logout") {
-//         final response = await request.logout(   
-//             "http://localhost:8000/auth/logout/");
-//         String message = response["message"];
-//         if (response['status']) {
-//           String uname = response["username"];
-//           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-//             content: Text("$message Sampai jumpa, $uname."),
-//           ));
-//           Navigator.pushReplacement(
-//             context,
-//             MaterialPageRoute(builder: (context) => const LoginPage()),
-//           );
-//         } else {
-//           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-//             content: Text("$message"),
-//           ));
-//         }
-//       }
-// ...
