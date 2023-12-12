@@ -1,5 +1,8 @@
-2023/12/11-08:01:14.677 d5c Reusing MANIFEST C:\Users\edber\AppData\Local\Temp\flutter_tools.17d58cb2\flutter_tools_chrome_device.9c536db9\Default\shared_proto_db/MANIFEST-000001
-2023/12/11-08:01:14.678 d5c Recovering log #7
-2023/12/11-08:01:14.681 d5c Reusing old log C:\Users\edber\AppData\Local\Temp\flutter_tools.17d58cb2\flutter_tools_chrome_device.9c536db9\Default\shared_proto_db/000007.log 
-2023/12/11-08:01:14.681 d5c Delete type=0 #3
-2023/12/11-08:01:14.682 d5c Delete type=0 #4
+2023/12/12-09:06:46.612 a003 Reusing MANIFEST /private/var/folders/kr/498g293n49jfng859d2fphtw0000gn/T/flutter_tools.zVIbVt/flutter_tools_chrome_device.IXB04w/Default/shared_proto_db/MANIFEST-000001
+2023/12/12-09:06:46.613 a003 Recovering log #7
+2023/12/12-09:06:46.614 a003 Reusing old log /private/var/folders/kr/498g293n49jfng859d2fphtw0000gn/T/flutter_tools.zVIbVt/flutter_tools_chrome_device.IXB04w/Default/shared_proto_db/000007.log 
+2023/12/12-09:06:46.614 a003 Delete type=0 #4
+2023/12/12-09:06:46.614 a003 Delete type=0 #3
+2023/12/12-09:07:12.792 a003 Level-0 table #11: started
+2023/12/12-09:07:12.811 a003 Level-0 table #11: 135388 bytes OK
+2023/12/12-09:07:12.818 a003 Delete type=0 #7

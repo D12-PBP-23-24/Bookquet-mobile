@@ -28,30 +28,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   void fetchUserProfileData() async {
-    var url = Uri.parse('http://127.0.0.1:8000/dashboard/get_profile_json/');
     final request = context.read<CookieRequest>();
     try {
-      // var response = await http.get(
-      //   url,
-      //   headers: {"Content-Type": "application/json"},
-      // );
       var response = await request.get(
         'http://127.0.0.1:8000/dashboard/get_profile_json/'
       );
-      nameController.text = response["nickname"];
+        nameController.text = response["nickname"];
         phoneController.text = response["phone"].toString();
         ageController.text = response["age"].toString();
         regionController.text = response["region"];
-      // if (response.statusCode == 200) {
-      //   var userData = jsonDecode(utf8.decode(response.bodyBytes));
-
-      //   nameController.text = userData["nickname"];
-      //   phoneController.text = userData["phone"].toString();
-      //   ageController.text = userData["age"].toString();
-      //   regionController.text = userData["region"];
-      // } else {
-      //   print('Failed to fetch user profile data');
-      // }
     } catch (error) {
       print('Error fetching user profile data: $error');
     }
@@ -110,7 +95,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 String newAge = ageController.text;
                 String newRegion = regionController.text;
 
-                // Validate phone and age
                 if (!isNonNegativeNumeric(newPhone) || !isNonNegativeNumeric(newAge)) {
                   showDialog(
                     context: context,
@@ -141,35 +125,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     'region': newRegion,
                   },
                 };
-
-                // Send the update request to the server
-                // var url = Uri.parse('http://127.0.0.1:8000/dashboard/update_profile_flutter/');
-                // var response = await http.post(
-                //   url,
-                //   headers: {"Content-Type": "application/json"},
-                //   body: jsonEncode(updatedData),
-                // );
-    //              var response = await request.post('http://127.0.0.1:8000/read-later/add-to-read-later2/$bookId/', {
-    //   "priority": priority, 
-    // });
                 var response = await request.post(
                   'http://127.0.0.1:8000/dashboard/update_profile_flutter/',{"nickname":newName,"phone":newPhone,"age":newAge,"region":newRegion},
                 );
                 Navigator.pop(context, updatedData);
-                // var response = await request.post2(
-                //   'http://127.0.0.1:8000/dashboard/update_profile_flutter/',
-                //   body: jsonEncode(updatedData),
-                //   headers: {"Content-Type": "application/json"},
-                // );
-                // Handle the response as needed
-                // if (response.statusCode == 200) {
-                //   print('Profile updated successfully');
-
-                //   // Navigate back to the profile page
-                //   Navigator.pop(context, updatedData);
-                // } else {
-                //   print('Failed to update profile');
-                // }
               },
               style: ElevatedButton.styleFrom(
                  backgroundColor: Color.fromRGBO(210, 230, 217, 1),

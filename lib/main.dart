@@ -1,4 +1,5 @@
 import 'package:bookquet_mobile/login.dart';
+import 'package:bookquet_mobile/profile.dart';
 
 import 'homepage.dart';
 import 'homepageEdbert.dart';
@@ -44,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Widget> _pages = [
     Homepage(),
     ReadLaterListScreen(), // TODO: Routing ke Edbert (ganti ini)
-    // BookDetailPage(bookTitle: '',), // TODO: Routing ke Farah (ganti ini)
+    DashboardPage() // TODO: Routing ke Farah (ganti ini)
   ];
 
   @override
