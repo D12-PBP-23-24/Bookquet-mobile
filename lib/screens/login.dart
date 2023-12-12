@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:bookquet_mobile/main.dart';
-import 'package:bookquet_mobile/screens/register.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const LoginApp());
@@ -147,25 +147,15 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(color: Colors.green),
                         ),
                         TextButton(
-                          onPressed: () {
-                            // Navigasi ke halaman pendaftaran
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => RegisterPage(),
+                            onPressed: _launchWebsite,
+                            child: Text(
+                              'Register Now',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
                               ),
-                            );
-                          },
-                          style: TextButton.styleFrom(
-                            primary: Colors.green, // Warna teks tombol
-                          ),
-                          child: Text(
-                            'Register Now',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ),
+                        
                       ],
                     ),
                   ),
@@ -176,5 +166,14 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+}
+
+void _launchWebsite() async {
+  const url = 'http://127.0.0.1:8000/register/'; // Replace with your website URL
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }
