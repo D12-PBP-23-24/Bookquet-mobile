@@ -1,14 +1,11 @@
-import 'package:bookquet_mobile/login.dart';
-import 'package:bookquet_mobile/profile.dart';
+import 'package:bookquet_mobile/screens/login.dart';
+import 'package:bookquet_mobile/screens/profile.dart';
 
-import 'homepage.dart';
-import 'homepageEdbert.dart';
-
-import 'loginEdbert.dart';
+import 'screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'read_later_list_screen.dart';
+import 'screens/read_later.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,7 +27,10 @@ class MyApp extends StatelessWidget {
                     colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
                     useMaterial3: true,
                 ),
-                home: LoginPage() ),
+                home: const LoginPage(),
+                // home: MyHomePage(),
+                debugShowCheckedModeBanner: false,
+                ),
             );
     }
 }
@@ -43,9 +43,9 @@ class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    Homepage(),
-    ReadLaterListScreen(), // TODO: Routing ke Edbert (ganti ini)
-    DashboardPage() // TODO: Routing ke Farah (ganti ini)
+    const Homepage(),
+    ReadLaterListScreen(),
+    const DashboardPage(),
   ];
 
   @override
@@ -56,19 +56,20 @@ class _MyHomePageState extends State<MyHomePage> {
           'Bookquet',
           style: TextStyle(
             fontWeight: FontWeight.bold,
+            fontFamily: 'Montserrat',
           ),
         ),
         backgroundColor: Colors.green.shade800,
         foregroundColor: Colors.white,
         actions: [
           IconButton(
-            icon: Icon(Icons.exit_to_app),
+            icon: const Icon(Icons.exit_to_app),
             onPressed: () async {
               // Mengambil instance CookieRequest dari Provider
               CookieRequest request = Provider.of<CookieRequest>(context, listen: false);
 
               // Melakukan logout
-              final response = await request.logout("http://localhost:8000/auth/logout/");
+              final response = await request.logout("http://127.0.0.1:8000/auth/logout/");
 
               String message = response["message"];
               if (response['status']) {
