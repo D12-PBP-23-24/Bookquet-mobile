@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:bookquet_mobile/pbp_django_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:bookquet_mobile/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -10,6 +9,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,6 +24,8 @@ class MyApp extends StatelessWidget {
 }
 
 class FeedbackList extends StatefulWidget {
+  const FeedbackList({super.key});
+
   @override
   _FeedbackListState createState() => _FeedbackListState();
 }
@@ -46,7 +49,6 @@ class _FeedbackListState extends State<FeedbackList> {
 
     if (response.statusCode == 200) {
       setState(() {
-        // print(response.body);
         feedbacks = List<Map<String, dynamic>>.from(json.decode(response.body)['feedbacks']);
       });
     } else {
@@ -58,19 +60,37 @@ class _FeedbackListState extends State<FeedbackList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Feedback List'),
+        title: const Text(
+          'Feedback List',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Montserrat',
+          ),
+        ),
+        backgroundColor: Colors.green.shade800,
+        foregroundColor: Colors.white,
       ),
       body: ListView.builder(
+        padding: const EdgeInsets.all(16.0),
         itemCount: feedbacks.length,
         itemBuilder: (context, index) {
-          return ListTile(
-            title: Text('ID: ${feedbacks[index]['id']}'),
-            subtitle: Text('User: ${feedbacks[index]['user']} - Comment: ${feedbacks[index]['comment']}'),
-            trailing: IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () {
-                deleteFeedback(feedbacks[index]['id']);
-              },
+          bool isCurrentUser = feedbacks[index]['user'] == request.jsonData['username'];
+          return Container(
+            margin: const EdgeInsets.only(bottom: 8.0),
+            child: ListTile(
+              title: Text(feedbacks[index]['comment']),
+              subtitle: Text('${feedbacks[index]['user']}' ' - ' '${feedbacks[index]['timestamp']}'),
+              leading: const Icon(Icons.person),
+              trailing: isCurrentUser ? IconButton(
+                icon: const Icon(Icons.delete),
+                onPressed: () {
+                  deleteFeedback(feedbacks[index]['id']);
+                },
+              ) : null,
+              tileColor: isCurrentUser ? Colors.green.shade50 : null,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
           );
         },
@@ -87,6 +107,8 @@ class _FeedbackListState extends State<FeedbackList> {
           });
         },
         child: Icon(Icons.add),
+        backgroundColor: Colors.green.shade800,
+        foregroundColor: Colors.white,
       ),
     );
   }
@@ -123,21 +145,39 @@ class _FeedbackListState extends State<FeedbackList> {
 class AddFeedback extends StatelessWidget {
   final TextEditingController commentController = TextEditingController();
 
+  AddFeedback({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Feedback'),
+        title: const Text(
+          'Add Feedback',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Montserrat',
+          ),
+        ),
+        backgroundColor: Colors.green.shade800,
+        foregroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            const Text(
+              'Memberikan masukan anda untuk pengembangan aplikasi ini',
+              style: TextStyle(
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+            const SizedBox(height: 16),
             TextField(
               controller: commentController,
-              decoration: InputDecoration(labelText: 'Comment'),
+              decoration: const InputDecoration(labelText: 'Comment'),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {
                 addFeedback(context.read<CookieRequest>(), context);

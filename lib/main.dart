@@ -1,11 +1,11 @@
 import 'package:bookquet_mobile/screens/login_regsiter/login.dart';
 import 'package:bookquet_mobile/screens/dashboard/profile.dart';
-import 'package:bookquet_mobile/screens/login_regsiter/register.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/homepage/homepage.dart';
 import 'screens/read_later/read_later.dart';
 import 'pbp_django_auth.dart';
+import 'screens/homepage/feedback.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,8 +28,6 @@ class MyApp extends StatelessWidget {
               useMaterial3: true,
           ),
           home: const LoginPage(),
-          // home: MyHomePage(),
-          // home: RegisterPage(),
           debugShowCheckedModeBanner: false,
         ),
       );
