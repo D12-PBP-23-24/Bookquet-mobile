@@ -1,11 +1,11 @@
-import 'package:bookquet_mobile/screens/login.dart';
-import 'package:bookquet_mobile/screens/profile.dart';
-
-import 'screens/homepage.dart';
+import 'package:bookquet_mobile/screens/login_regsiter/login.dart';
+import 'package:bookquet_mobile/screens/dashboard/profile.dart';
+import 'package:bookquet_mobile/screens/login_regsiter/register.dart';
 import 'package:flutter/material.dart';
-import 'pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'screens/read_later.dart';
+import 'screens/homepage/homepage.dart';
+import 'screens/read_later/read_later.dart';
+import 'pbp_django_auth.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,22 +16,23 @@ class MyApp extends StatelessWidget {
 
     @override
     Widget build(BuildContext context) {
-        return Provider(
-            create: (_) {
-                CookieRequest request = CookieRequest();
-                return request;
-            },
-            child: MaterialApp(
-                title: 'Flutter App',
-                theme: ThemeData(
-                    colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
-                    useMaterial3: true,
-                ),
-                home: const LoginPage(),
-                // home: MyHomePage(),
-                debugShowCheckedModeBanner: false,
-                ),
-            );
+      return Provider(
+        create: (_) {
+            CookieRequest request = CookieRequest();
+            return request;
+        },
+        child: MaterialApp(
+          title: 'Flutter App',
+          theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+              useMaterial3: true,
+          ),
+          home: const LoginPage(),
+          // home: MyHomePage(),
+          // home: RegisterPage(),
+          debugShowCheckedModeBanner: false,
+        ),
+      );
     }
 }
 class MyHomePage extends StatefulWidget {
