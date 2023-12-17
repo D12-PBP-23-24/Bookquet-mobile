@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'network_service_for_read_later.dart';
 import '../../pbp_django_auth.dart';
-import 'read_later.dart'; 
+import 'read_later.dart';
 
 class PrioritySelectionScreen extends StatefulWidget {
   final int bookId;
@@ -20,7 +20,7 @@ class _PrioritySelectionScreenState extends State<PrioritySelectionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Select Your Priority',
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -28,35 +28,72 @@ class _PrioritySelectionScreenState extends State<PrioritySelectionScreen> {
         ),
         backgroundColor: Colors.green.shade800,
         foregroundColor: Colors.white,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            DropdownButton<String>(
-              value: selectedPriority,
-              onChanged: (String? newValue) {
-                setState(() {
-                  selectedPriority = newValue!;
-                });
-              },
-              items: <String>['low', 'medium', 'high']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                _addToReadLater(context, selectedPriority);
-              },
-              child: Text('Add to Read Later'),
-            ),
-          ],
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
         ),
       ),
+      body: SingleChildScrollView(
+        child:Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "Choose the Priority",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Montserrat',
+                    fontSize: 20,
+                  ),
+                ),
+                SizedBox(height: 20),
+                Container(
+                  width:200,
+                  child:DropdownButton<String>(
+                    isExpanded: true,
+                    value: selectedPriority,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedPriority = newValue!;
+                      });
+                    },
+                    items: <String>['low', 'medium', 'high']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    _addToReadLater(context, selectedPriority);
+                  },
+                  child: Text('Add to Read Later',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Montserrat',
+                      ),
+                  ),
+                  // style: ElevatedButton.styleFrom(
+                  //   primary: Colors.green.shade800,
+                  //   shape: RoundedRectangleBorder(
+                  //     borderRadius: BorderRadius.circular(30.0),
+                  //   ),
+                  //   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  // ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      )
     );
   }
 
@@ -65,13 +102,17 @@ class _PrioritySelectionScreenState extends State<PrioritySelectionScreen> {
     final request = context.read<CookieRequest>();
     bool success = await networkService.addToReadLater(request, widget.bookId, priority);
     if (success) {
-       Navigator.pushReplacement(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => ReadLaterListScreen()),
       );
-      // Navigator.pop(context); // Go back to the previous screen
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Buku sudah pernah ditambahkan dengan prioritas lain")));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Book has already been added with a different priority"),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 }

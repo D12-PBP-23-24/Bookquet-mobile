@@ -30,7 +30,7 @@ class _ReadLaterListScreenState extends State<ReadLaterListScreen> {
     });
     try {
     } catch (e) {
-      // Handle exception by showing a message or error state to the user
+
     }
   }
   void _removeBook(int itemId) async {
@@ -39,14 +39,12 @@ class _ReadLaterListScreenState extends State<ReadLaterListScreen> {
       setState(() {
         books.removeWhere((item) => item.id == itemId);
       });
-      // Optionally show a success message
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Book removed successfully')),
       );
     }
     try {
     } catch (e) {
-      // Handle the error, maybe show a Snackbar with the error message
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to remove the book: $e')),
       );
@@ -57,40 +55,40 @@ class _ReadLaterListScreenState extends State<ReadLaterListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Your Read Later List'),
-        backgroundColor: Colors.green, 
+        title: Text('Your Read Later List',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Montserrat',
+          ),
+        ),
+        backgroundColor: Colors.green,
       ),
-      body: Column(
-        children: [
-          ButtonBar(
-            alignment: MainAxisAlignment.center,
-            children: <Widget>[
-              ElevatedButton(child: Text('All'), onPressed: () => {
-                _loadBooks("all")
-              }),
-              ElevatedButton(child: Text('Low'), onPressed: () => {
-                _loadBooks("low")
-
-              }),
-              ElevatedButton(child: Text('Medium'), onPressed: () => {
-                _loadBooks("medium")
-
-              }),
-              ElevatedButton(child: Text('High'), onPressed: () => {
-                _loadBooks("high")
-
-              }),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child:Text(
-              'Priority: $priorityFilter',
-              style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),
-            )
-          ),
-          Expanded(
-            child: ListView.builder(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 8.0, 
+                children: <Widget>[
+                  ElevatedButton(child: Text('All'), onPressed: () => _loadBooks("all")),
+                  ElevatedButton(child: Text('Low'), onPressed: () => _loadBooks("low")),
+                  ElevatedButton(child: Text('Medium'), onPressed: () => _loadBooks("medium")),
+                  ElevatedButton(child: Text('High'), onPressed: () => _loadBooks("high")),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Priority: $priorityFilter',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, fontFamily: 'Montserrat'),
+              )
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(), // to disable ListView's own scrolling
               itemCount: books.length,
               itemBuilder: (context, index) {
                 return Card(
@@ -103,6 +101,7 @@ class _ReadLaterListScreenState extends State<ReadLaterListScreen> {
                       ElevatedButton(
                         child: Text('Upgrade Priority'),
                         onPressed: () async {
+                        
                           bool success = await networkService.upgradePriority(request, books[index].id);
                           if (success) {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Priority upgraded')));
@@ -118,7 +117,6 @@ class _ReadLaterListScreenState extends State<ReadLaterListScreen> {
                         // color: Colors.red,
                         child: Text('Remove from Read Later'),
                         onPressed: () {
-                          // Handle the remove from read later logic
                           _removeBook(books[index].id);
                         },
                       ),
@@ -127,8 +125,8 @@ class _ReadLaterListScreenState extends State<ReadLaterListScreen> {
                 );
               },
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
