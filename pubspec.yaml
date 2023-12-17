@@ -1,5 +1,7 @@
 name: bookquet_mobile
 description: "A new Flutter project."
+repository: https://github.com/pbp-fasilkom-ui/pbp_django_auth
+
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -30,11 +32,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  http: ^0.13.6
+  shared_preferences: ^2.0.15
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  provider: ^6.1.1
+  pbp_django_auth: ^0.3.1
+  url_launcher: ^6.2.2
+  #pbp_django_auth: ^0.3.1
 
 dev_dependencies:
   flutter_test:
@@ -88,3 +95,51 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: fonts/Montserrat-Thin.ttf
+          weight: 100
+        - asset: fonts/Montserrat-ThinItalic.ttf
+          weight: 100
+          style: italic
+        - asset: fonts/Montserrat-ExtraLight.ttf
+          weight: 200
+        - asset: fonts/Montserrat-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: fonts/Montserrat-Light.ttf
+          weight: 300
+        - asset: fonts/Montserrat-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: fonts/Montserrat-Regular.ttf
+          weight: 400
+        - asset: fonts/Montserrat-Italic.ttf
+          weight: 400
+          style: italic
+        - asset: fonts/Montserrat-Medium.ttf
+          weight: 500
+        - asset: fonts/Montserrat-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: fonts/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: fonts/Montserrat-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - asset: fonts/Montserrat-Bold.ttf
+          weight: 700
+        - asset: fonts/Montserrat-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: fonts/Montserrat-ExtraBold.ttf
+          weight: 800
+        - asset: fonts/Montserrat-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: fonts/Montserrat-Black.ttf
+          weight: 900
+        - asset: fonts/Montserrat-BlackItalic.ttf
+          weight: 900
+          style: italic
