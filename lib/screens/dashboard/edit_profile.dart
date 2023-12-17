@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import '../../pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+import 'package:bookquet_mobile/pbp_django_auth.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final int selectedProfilePK;

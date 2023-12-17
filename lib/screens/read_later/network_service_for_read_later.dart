@@ -1,5 +1,5 @@
-import '../../pbp_django_auth.dart';
-import '../../models/read_later_book.dart';
+import 'package:bookquet_mobile/pbp_django_auth.dart';
+import 'package:bookquet_mobile/models/read_later_book.dart';
 
 class NetworkService { 
   final String baseUrl = 'http://127.0.0.1:8000/read-later';

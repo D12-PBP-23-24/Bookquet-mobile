@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../models/dashboard.dart';
-import 'edit_profile.dart';
-import '../../pbp_django_auth.dart';
+import 'package:bookquet_mobile/models/dashboard.dart';
+import 'package:bookquet_mobile/screens/dashboard/edit_profile.dart';
+import 'package:bookquet_mobile/pbp_django_auth.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);

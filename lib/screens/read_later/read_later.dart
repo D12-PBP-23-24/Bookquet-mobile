@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'network_service_for_read_later.dart';
-import '../../models/read_later_book.dart';
+import 'package:bookquet_mobile/pbp_django_auth.dart';
+import 'package:bookquet_mobile/models/read_later_book.dart';
+import 'package:bookquet_mobile/screens/read_later/network_service_for_read_later.dart';
 
 class ReadLaterListScreen extends StatefulWidget {
   @override

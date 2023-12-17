@@ -70,9 +70,12 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
       child: Column(
         children: [
+
+          // Hero Block
           Container(
             color: const Color(0xffe4fef3),
             padding: const EdgeInsets.all(24.0),
@@ -88,7 +91,7 @@ class _HomepageState extends State<Homepage> {
                     fontFamily: 'Montserrat',
                   ),
                 ),
-                SizedBox(height: 8.0),
+                const SizedBox(height: 8.0),
                 const Text(
                   'Di setiap buku, terdapat karangan kata-kata berbunga!',
                   style: TextStyle(
@@ -98,6 +101,14 @@ class _HomepageState extends State<Homepage> {
                 ),
                 const SizedBox(height: 16.0),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green.shade800,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -109,7 +120,7 @@ class _HomepageState extends State<Homepage> {
                   child: const Text(
                     "Berikan Feedback",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w300,
                       fontFamily: 'Montserrat',
                     ),
                   ),
@@ -117,45 +128,105 @@ class _HomepageState extends State<Homepage> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              controller: _searchController,
-              decoration: const InputDecoration(
-                hintText: 'Cari buku disini!',
-                prefixIcon: Icon(Icons.search),
+
+          // Search Bar dan Dropdown Bar
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xffe4fef3),
+                  Colors.white,
+                ],
               ),
-              onChanged: (query) {
-                setState(() {
-                  _booksFuture = fecthBook();
-                });
-              },
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 24.0, top: 8.0, bottom: 8.0, right: 8.0),
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade800,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: TextField(
+                      style: const TextStyle(
+                        color: Colors.white, 
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w300,
+                      ),
+                      controller: _searchController,
+                      decoration: const InputDecoration(
+                        hintText: 'Cari buku disini!',
+                        hintStyle: TextStyle(
+                          color: Colors.white, 
+                          fontFamily: 'Montserrat', 
+                          fontWeight: FontWeight.w300,
+                        ),
+                        prefixIcon: Icon(Icons.search, color: Colors.white),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                        ),
+                      ),
+                      onChanged: (query) {
+                        setState(() {
+                          _booksFuture = fecthBook();
+                        });
+                      },
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 24.0, top: 8.0, bottom: 8.0),
+                    padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade800,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                      isExpanded: true, 
+                        iconEnabledColor: Colors.white,
+                        focusColor: Colors.white,
+                        dropdownColor: Colors.green.shade800,
+                        value: _selectedGenre,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            _selectedGenre = newValue!;
+                            _booksFuture = fecthBook();
+                          });
+                        },
+                        items: _genreChoices.map<DropdownMenuItem<String>>((Map<String, String> genre) {
+                          return DropdownMenuItem<String>(
+                            value: genre['value']!,
+                            child: Text(
+                              genre['label']!,
+                              style: const TextStyle(
+                                color: Colors.white, 
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w300,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    )
+                  ),
+                ),
+              ],
             ),
           ),
-          const Text(
-            'Genre Buku',
-            style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.bold),
-            textAlign: TextAlign.center,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: DropdownButton<String>(
-              value: _selectedGenre,
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedGenre = newValue!;
-                  _booksFuture = fecthBook();
-                });
-              },
-              items: _genreChoices.map<DropdownMenuItem<String>>((Map<String, String> genre) {
-                return DropdownMenuItem<String>(
-                  value: genre['value']!,
-                  child: Text(genre['label']!),
-                );
-              }).toList(),
-            ),
-          ),
-          const SizedBox(height: 8.0),
+
+          // Daftar Buku
+          const SizedBox(height: 16.0),
           const Center(
             child: Text(
               'Daftar Buku',
@@ -166,7 +237,6 @@ class _HomepageState extends State<Homepage> {
               ),
             ),
           ),
-          const SizedBox(height: 8.0),
           FutureBuilder(
             future: _booksFuture,
             builder: (context, AsyncSnapshot<List<Book>> snapshot) {
@@ -258,6 +328,17 @@ class _HomepageState extends State<Homepage> {
                               ),
                               const SizedBox(height: 8.0),
                               ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green.shade800),
+                                  foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                                  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0)),
+                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                  ),
+                                
+                                ),
                                 onPressed: () {
                                   Navigator.push(
                                     context,
@@ -269,7 +350,7 @@ class _HomepageState extends State<Homepage> {
                                 child: const Text(
                                   "Read Later",
                                   style: TextStyle(
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w500,
                                     fontFamily: 'Montserrat',
                                   ),
                                 ),

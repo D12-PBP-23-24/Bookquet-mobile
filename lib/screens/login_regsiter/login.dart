@@ -1,9 +1,9 @@
-import 'package:bookquet_mobile/screens/login_regsiter/register.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:bookquet_mobile/main.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../pbp_django_auth.dart';
+import 'package:bookquet_mobile/main.dart';
+import 'package:bookquet_mobile/screens/login_regsiter/register.dart';
+import 'package:bookquet_mobile/pbp_django_auth.dart';
 
 void main() {
   runApp(const LoginApp());
