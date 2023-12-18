@@ -89,40 +89,114 @@ class _ReadLaterListScreenState extends State<ReadLaterListScreen> {
               style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),
             )
           ),
+          // Expanded(
+          //   child: ListView.builder(
+          //     itemCount: books.length,
+          //     itemBuilder: (context, index) {
+          //       return Card(
+          //         child: Column(
+          //           children: [
+          //             Image.network(books[index].coverImg),
+          //             Text(books[index].title, style: TextStyle(fontWeight: FontWeight.bold)),
+          //             Text(books[index].author),
+          //             Text(books[index].genres),
+          //             ElevatedButton(
+          //               child: Text('Upgrade Priority'),
+          //               onPressed: () async {
+          //                 bool success = await networkService.upgradePriority(request, books[index].id);
+          //                 if (success) {
+          //                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Priority upgraded')));
+          //                   _loadBooks(priorityFilter);
+          //                 } else {
+          //                   // Handle the error
+          //                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to upgrade priority')));
+          //                 }
+          //               },
+          //             ),
+          //             SizedBox(height: 10,),
+          //             ElevatedButton(
+          //               // color: Colors.red,
+          //               child: Text('Remove from Read Later'),
+          //               onPressed: () {
+          //                 // Handle the remove from read later logic
+          //                 _removeBook(books[index].id);
+          //               },
+          //             ),
+          //           ],
+          //         ),
+          //       );
+          //     },
+          //   ),
+          // ),
           Expanded(
-            child: ListView.builder(
+            child: GridView.builder(
+              padding: const EdgeInsets.all(16.0),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 8.0,
+                mainAxisSpacing: 8.0,
+                mainAxisExtent: 500,
+              ),
               itemCount: books.length,
               itemBuilder: (context, index) {
                 return Card(
-                  child: Column(
-                    children: [
-                      Image.network(books[index].coverImg),
-                      Text(books[index].title, style: TextStyle(fontWeight: FontWeight.bold)),
-                      Text(books[index].author),
-                      Text(books[index].genres),
-                      ElevatedButton(
-                        child: Text('Upgrade Priority'),
-                        onPressed: () async {
-                          bool success = await networkService.upgradePriority(request, books[index].id);
-                          if (success) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Priority upgraded')));
-                            _loadBooks(priorityFilter);
-                          } else {
-                            // Handle the error
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to upgrade priority')));
-                          }
-                        },
-                      ),
-                      SizedBox(height: 10,),
-                      ElevatedButton(
-                        // color: Colors.red,
-                        child: Text('Remove from Read Later'),
-                        onPressed: () {
-                          // Handle the remove from read later logic
-                          _removeBook(books[index].id);
-                        },
-                      ),
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: Image.network(
+                            books[index].coverImg,
+                            fit: BoxFit.fitWidth,
+                          ),
+                        ),
+                        ListTile(
+                          title: Text(
+                            books[index].title,
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Montserrat'),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                          subtitle: Text(
+                            books[index].author,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                        ),
+                        ListTile(
+                          leading: Text(
+                            books[index].genres,
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Montserrat'),
+                          ),
+                          trailing: Text(
+                            books[index].year.toString(),
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Montserrat'),
+                          ),
+                        ),
+                        ElevatedButton(
+                          child: Text('Upgrade Priority'),
+                          onPressed: () async {
+                            bool success = await networkService.upgradePriority(request, books[index].id);
+                            if (success) {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Priority upgraded')));
+                              _loadBooks(priorityFilter);
+                            } else {
+                              // Handle the error
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to upgrade priority')));
+                            }
+                          },
+                        ),
+                        SizedBox(height: 10,),
+                        ElevatedButton(
+                          // color: Colors.red,
+                          child: Text('Remove'),
+                          onPressed: () {
+                            // Handle the remove from read later logic
+                            _removeBook(books[index].id);
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },

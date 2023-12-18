@@ -1,4 +1,3 @@
-import 'package:bookquet_mobile/screens/homepage/feedback.dart';
 import 'package:bookquet_mobile/screens/login_regsiter/login.dart';
 import 'package:bookquet_mobile/screens/dashboard/profile.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +27,6 @@ class MyApp extends StatelessWidget {
               useMaterial3: true,
           ),
           home: const LoginPage(),
-          // home: MyHomePage(),
-          // home: FeedbackList(),
           debugShowCheckedModeBanner: false,
         ),
       );
