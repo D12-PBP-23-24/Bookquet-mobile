@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final book = bookFromJson(jsonString);
+
 import 'dart:convert';
 
 List<Book> bookFromJson(String str) => List<Book>.from(json.decode(str).map((x) => Book.fromJson(x)));
@@ -32,11 +36,11 @@ class Fields {
     String title;
     String author;
     String description;
-    int? isbn;
+    String isbn;
     String genres;
     String coverImg;
     int year;
-    double averageRate;
+    int averageRate;
     int userRated;
     List<int> favorites;
 
@@ -61,7 +65,7 @@ class Fields {
         genres: json["genres"],
         coverImg: json["cover_img"],
         year: json["year"],
-        averageRate: json["average_rate"]?.toDouble(),
+        averageRate: json["average_rate"],
         userRated: json["user_rated"],
         favorites: List<int>.from(json["favorites"].map((x) => x)),
     );

@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:bookquet_mobile/screens/homepage/feedback.dart';
 import 'package:bookquet_mobile/screens/read_later/priority_selection.dart';
 import 'package:bookquet_mobile/models/book.dart';
+import 'package:bookquet_mobile/screens/review/review.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -253,7 +254,8 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ),
                 );
-              } else {
+              } 
+              else {
                 List<Book> filteredBooks = _searchBooks(_searchController.text, snapshot.data!);
                 return SizedBox(
                   height: (filteredBooks.length == 1) ? filteredBooks.length * 500 : filteredBooks.length * 250,
@@ -281,8 +283,15 @@ class _HomepageState extends State<Homepage> {
                     );
 
                     return InkWell(
-                      onTap: () {
-                        // TODO: Routing ke William
+                      onTap: () async {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ReviewPage(bookId: filteredBooks[index].pk),
+                          ),
+                        );
+                        fecthBook();
                       },
                       child: Card(
                         child: Padding(

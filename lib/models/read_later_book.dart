@@ -9,7 +9,7 @@ class ItemReadLater {
     String title;
     String author;
     String description;
-    int isbn;
+    String isbn;
     String genres;
     String coverImg;
     int year;
@@ -36,7 +36,7 @@ class ItemReadLater {
     title: json["title"] as String? ?? 'Unknown Title',
     author: json["author"] as String? ?? 'Unknown Author',
     description: json["description"] as String? ?? 'No Description',
-    isbn: json["isbn"] as int? ?? 0,
+    isbn: json["isbn"] as String? ?? 'No ISBN',
     genres: json["genres"] as String? ?? 'No Genres',
     coverImg: json["cover_img"] as String? ?? 'No Cover Image',
     year: json["year"] as int? ?? 0,
