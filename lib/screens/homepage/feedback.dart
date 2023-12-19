@@ -128,7 +128,7 @@ class _FeedbackListState extends State<FeedbackList> {
                           minWidth: double.infinity,
                           child: MaterialButton(
                             onPressed: () {
-                              addFeedback(context.read<CookieRequest>(), context);
+                              addFeedback(request, context);
                             },
                             child: const Icon(Icons.send, color: Colors.white),
                           ),
@@ -201,12 +201,13 @@ class _FeedbackListState extends State<FeedbackList> {
   }
 
   Future<void> addFeedback(CookieRequest request, BuildContext context) async {
+    print(request.jsonData['username']);
     final response = await request.post(
       ('https://bookquet-d12-tk.pbp.cs.ui.ac.id/feedback/add/'),
       {'comment': commentController.text},
     );
 
-    if (response['status'] == 201) {
+    if (response['status'] == 200) {
       // Jika penambahan feedback berhasil, refresh data
       fetchData();
       commentController.clear();

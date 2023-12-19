@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "E:/Kuliah/Sem3/PBP/PAS/linux"
+    "cmake.sourceDirectory": "E:/Kuliah/Sem3/PBP/PAS/linux",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

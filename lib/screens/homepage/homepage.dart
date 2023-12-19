@@ -38,10 +38,10 @@ class _HomepageState extends State<Homepage> {
   void initState() {
     super.initState();
     _searchController = TextEditingController();
-    _booksFuture = fecthBook();
+    _booksFuture = fetchBook();
   }
 
-  Future<List<Book>> fecthBook() async {
+  Future<List<Book>> fetchBook() async {
     var url = Uri.parse('https://bookquet-d12-tk.pbp.cs.ui.ac.id/get-book');
     var response = await http.get(
       url,
@@ -49,6 +49,7 @@ class _HomepageState extends State<Homepage> {
     );
 
     var data = jsonDecode(utf8.decode(response.bodyBytes));
+    // print(data);
 
     List<Book> books = [];
     for (var i in data) {
@@ -62,7 +63,7 @@ class _HomepageState extends State<Homepage> {
 
   Future<void> _refreshBooks() async {
     setState(() {
-      _booksFuture = fecthBook();
+      _booksFuture = fetchBook();
     });
     await _booksFuture;
   }
@@ -184,7 +185,7 @@ class _HomepageState extends State<Homepage> {
                       ),
                       onChanged: (query) {
                         setState(() {
-                          _booksFuture = fecthBook();
+                          _booksFuture = fetchBook();
                         });
                       },
                     ),
@@ -209,7 +210,7 @@ class _HomepageState extends State<Homepage> {
                         onChanged: (String? newValue) {
                           setState(() {
                             _selectedGenre = newValue!;
-                            _booksFuture = fecthBook();
+                            _booksFuture = fetchBook();
                           });
                         },
                         items: _genreChoices.map<DropdownMenuItem<String>>((Map<String, String> genre) {
