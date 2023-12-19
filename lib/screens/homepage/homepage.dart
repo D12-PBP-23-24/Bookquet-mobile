@@ -42,7 +42,7 @@ class _HomepageState extends State<Homepage> {
   }
 
   Future<List<Book>> fecthBook() async {
-    var url = Uri.parse('http://127.0.0.1:8000/get-book');
+    var url = Uri.parse('https://bookquet-d12-tk.pbp.cs.ui.ac.id/get-book');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -59,6 +59,14 @@ class _HomepageState extends State<Homepage> {
 
     return books;
   }
+
+  Future<void> _refreshBooks() async {
+    setState(() {
+      _booksFuture = fecthBook();
+    });
+    await _booksFuture;
+  }
+
 
   List<Book> _searchBooks(String query, List<Book> books) {
     return books.where((book) {
@@ -269,18 +277,18 @@ class _HomepageState extends State<Homepage> {
                   ),
                   itemCount: filteredBooks.length,
                   itemBuilder: (context, index) {
-                    int filledStars = filteredBooks[index].fields.averageRate.round();
-                    int emptyStars = 5 - filledStars;
+                    // int filledStars = filteredBooks[index].fields.averageRate.round();
+                    // int emptyStars = 5 - filledStars;
 
-                    List<Widget> starIcons = List.generate(
-                      filledStars,
-                      (index) => const Icon(Icons.star),
-                    );
+                    // List<Widget> starIcons = List.generate(
+                    //   filledStars,
+                    //   (index) => const Icon(Icons.star),
+                    // );
 
-                    List<Widget> borderStarIcons = List.generate(
-                      emptyStars,
-                      (index) => const Icon(Icons.star_border),
-                    );
+                    // List<Widget> borderStarIcons = List.generate(
+                    //   emptyStars,
+                    //   (index) => const Icon(Icons.star_border),
+                    // );
 
                     return InkWell(
                       onTap: () async {
@@ -291,20 +299,20 @@ class _HomepageState extends State<Homepage> {
                                 ReviewPage(bookId: filteredBooks[index].pk),
                           ),
                         );
-                        fecthBook();
+                        await _refreshBooks();
                       },
                       child: Card(
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Column(
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  ...starIcons,
-                                  ...borderStarIcons,
-                                ],
-                              ),
+                              // Row(
+                              //   mainAxisAlignment: MainAxisAlignment.center,
+                              //   children: [
+                              //     ...starIcons,
+                              //     ...borderStarIcons,
+                              //   ],
+                              // ),
                               const SizedBox(height: 8.0),
                               Expanded(
                                 child: Image.network(

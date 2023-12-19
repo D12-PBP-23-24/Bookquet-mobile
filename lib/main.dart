@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
               CookieRequest request = Provider.of<CookieRequest>(context, listen: false);
 
               // Melakukan logout
-              final response = await request.logout("http://127.0.0.1:8000/auth/logout/");
+              final response = await request.logout("https://bookquet-d12-tk.pbp.cs.ui.ac.id/auth/logout/");
 
               String message = response["message"];
               if (response['status']) {

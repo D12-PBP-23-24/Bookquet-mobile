@@ -14,7 +14,7 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   Future<List<dashboard>> fetchProfile(BuildContext context) async {
     final request = context.read<CookieRequest>();
-    var response = await request.get('http://127.0.0.1:8000/dashboard/get_profile/');
+    var response = await request.get('https://bookquet-d12-tk.pbp.cs.ui.ac.id/dashboard/get_profile/');
     List<dashboard> profile = [];
     for (var d in response) {
       if (d != null) {

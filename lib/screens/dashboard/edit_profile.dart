@@ -28,7 +28,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     final request = context.read<CookieRequest>();
     try {
       var response = await request.get(
-        'http://127.0.0.1:8000/dashboard/get_profile_json/'
+        'https://bookquet-d12-tk.pbp.cs.ui.ac.id/dashboard/get_profile_json/'
       );
         nameController.text = response["nickname"];
         phoneController.text = response["phone"].toString();
@@ -123,7 +123,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   },
                 };
                 var response = await request.post(
-                  'http://127.0.0.1:8000/dashboard/update_profile_flutter/',{"nickname":newName,"phone":newPhone,"age":newAge,"region":newRegion},
+                  'https://bookquet-d12-tk.pbp.cs.ui.ac.id/dashboard/update_profile_flutter/',{"nickname":newName,"phone":newPhone,"age":newAge,"region":newRegion},
                 );
                 Navigator.pop(context, updatedData);
               },

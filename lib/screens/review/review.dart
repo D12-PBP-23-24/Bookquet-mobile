@@ -33,7 +33,7 @@ class _ReviewPageState extends State<ReviewPage> {
 
   Future<ReviewBook> fetchBook() async {
     var url =
-        Uri.parse('http://127.0.0.1:8000/book-preview/preview-mobile/$bookId');
+        Uri.parse('https://bookquet-d12-tk.pbp.cs.ui.ac.id/book-preview/preview-mobile/$bookId');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -45,7 +45,7 @@ class _ReviewPageState extends State<ReviewPage> {
 
   Future<void> addReview(CookieRequest request, BuildContext context) async {
     final response = await request.post(
-      ('http://127.0.0.1:8000/book-preview/add-review-mobile/$bookId/'),
+      ('https://bookquet-d12-tk.pbp.cs.ui.ac.id/book-preview/add-review-mobile/$bookId/'),
       {'rate': rating.toString(), 'comment': commentController.text},
     );
 

@@ -118,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                             String password = _passwordController.text;
 
                             final response = await request.login(
-                              "http://127.0.0.1:8000//auth/login/",
+                              "https://bookquet-d12-tk.pbp.cs.ui.ac.id/auth/login/",
                               {
                                 'username': username,
                                 'password': password,
@@ -208,7 +208,7 @@ class _LoginPageState extends State<LoginPage> {
   }
   
   void _launchWebsite() async {
-    const url = 'http://127.0.0.1:8000/register/'; // Replace with your website URL
+    const url = 'https://bookquet-d12-tk.pbp.cs.ui.ac.id/register/'; // Replace with your website URL
     if (await canLaunch(url)) {
       await launch(url);
     } else {

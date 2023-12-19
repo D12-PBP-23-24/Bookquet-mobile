@@ -36,7 +36,7 @@ class Fields {
     String title;
     String author;
     String description;
-    String isbn;
+    int isbn;
     String genres;
     String coverImg;
     int year;

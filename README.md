@@ -24,33 +24,28 @@ Berikut ini adalah daftar modul yang akan kami implementasikan beserta pengemban
  
 | Modul | Penjelasan | Pengembang |
 | -- | -- | -- |
-| **Authentication** | Pengguna pada aplikasi Django ini dapat melakukan login dan logout (registrasi dilakukan di *web service* Django). Akun user yang sudah terdaftar di Django bisa melakukan login melalui aplikasi Bookquet Mobile di Flutter | Carissa |
-| **User Dashboard** | Menampilkan informasi pribadi pengguna yang sudah login. Pengguna dapat meng-edit data pribadinya serta mengakses data buku yang sudah ia nilai | Farah |.
-| **Homepage** | Menampilkan halaman utama berupa daftar buku. Pengguna disambut dengan *hero block* dan daftar buku dibawahnya. Pengguna juga bisa menggunakan fitur *filter* dan *search* untuk mencari buku berdasarkan *genre* dan judul. Admin dapat menonaktifkan atau mengaktifkan fitur pencarian dan menentukan buku favoritnya. | Akmal |
-| **Book Preview, Rate & Review**| Menampilkan informasi suatu buku seperti sinopsis, pengarang, judul, dan lain-lain. Pengguna dapat memberikan *review*, *rate*, dan memasukkan buku ke dalam daftar baca nanti. Pada aplikasi ini, pengguna dapat melihat komentar dan mendapatkan rekomendasi buku berdasarkan genre yang sama. Admin pada page ini juga dapat mengedit cara menampilkan komentar / tipe filter | William |
-| **Read Later** | Pengguna dapat menambahkan suatu buku ke dalam daftar baca nanti. Dalam aplikasi Django ini, pengguna dapat melihat daftar buku yang ditambahkan dan dapat menghapus buku tersebut dari daftar baca nanti. Terdapat 3 prioritas pada read-later yang dapat dipilih yaitu low, medium, dan high. Khusus admin, ia dapat update priority pada read later book, yaitu dari prioritas low ke medium atau medium ke high. | Edbert |
+| **Authentication** | Pengguna pada aplikasi Flutter ini dapat melakukan login dan logout (registrasi dilakukan di *web service* Django). Akun user yang sudah terdaftar di Django bisa melakukan login melalui aplikasi Bookquet Mobile di Flutter | Carissa |
+| **User Dashboard** | Menampilkan informasi pribadi pengguna yang sudah login (informasi user dari pembuatan akun). Pengguna juga dapat meng-edit data pribadinya. | Farah |.
+| **Homepage** | Menampilkan halaman utama berupa daftar buku. Pengguna disambut dengan *hero block* dan daftar buku dibawahnya. Setiap buku ditampilkan menggunakan *card* yang memberikan informasi berupa judul, *genre*, *author*, tahun terbit, dan *rate*. Pengguna bisa menggunakan fitur *filter* dan *search* untuk mencari buku berdasarkan *genre*, judul, atau *author*. Pengguna juga bisa menambahkan *feedback* terhadap aplikasi yang digunakan pada tombol `Tambahkan Feedback` dan dapat menghapusnya. | Akmal |
+| **Book Preview, Rate & Review**| Menampilkan informasi suatu buku seperti sinopsis, pengarang, judul, rating buku, genre dan lain-lain. Pengguna dapat memberikan ulasan (komentar) dan rating (bintang dengan rentang 1-5), jika User sudah pernah melakukan rating, maka rating terbaru akan memperbarui rating lama. Pada aplikasi ini, pengguna dapat melihat komentar beragam user (ditampilkan terbatas). | William |
+| **Read Later** | Pengguna dapat menambahkan suatu buku ke dalam daftar *read later* dengan 3 buah pilihan prioritas yaitu *low*, *medium*, dan *high*. Dalam halaman tampilan *read later*, terdapat 4 tombol yaitu *all*, *low*, *medium*, dan *high*, dimana jika dipencet maka halaman tersebut akan menampilkan buku yang memiliki prioritas tersebut (jika *priority* yang dipilih adalah *all*, akan menampilkan semua buku pada *read later*). Pengguna juga dapat menghapus sebuah buku dari *read later*. | Edbert |
 
 ## 🕵️ *Role* atau Peran Pengguna 
 #### 🔓 User yang Sudah Terautentikasi
-- Melakukan pencarian dan *filter* berdasarkan genre
-- Membuka halaman *profile* yang berisi data-data user terkait
-- Memberikan *review* dan *rating* ke buku yang dipilih
-- Menambah dan menghapus daftar buku pada fitur baca nanti
-#### 🔒 User yang Belum Terautentikasi
-- Melakukan pencarian dan *filter* berdasarkan genre
-- Melihat buku pada halaman utama
+Menggunakan fitur aplikasi secara menyeluruh. Fitur yang disedaiakan yaitu:
+- Melakukan pencarian dan *filter* berdasarkan judul, *author*, atau *genre*.
+- Membuka halaman *profile* yang berisi data-data *user* terkait dan dapat mengeditnya.
+- Memberikan *review* dan *rating* ke buku yang dipilih.
+- Menambah dan menghapus buku pada daftar baca nanti (*read later*).
 
-**Catatan** : Role Admin dihilangkan pada Bookquet Mobile sehingga Admin harus melakukan log in dari aplikasi web
-
-##  *Dataset* yang Digunakan
+## *Dataset* yang Digunakan
 *Dataset* yang kami gunakan bersumber dari [Kaggle - GoodReads Best Books](https://www.kaggle.com/datasets/thedevastator/comprehensive-overview-of-52478-goodreads-best-b/data). Alasan pemilihan *dataset* ini dikarenakan tersedianya informasi lengkap buku seperti deskripsi singkat, genre, gambar sampul, dan lain-lain. Kami akan mengambil sebanyak 100 buku dari *dataset* tersebut.
 
 ## Alur Pengintegrasian dengan Web Service untuk Terhubung dengan Aplikasi Web yang Sudah dibuat saat Proyek Tengah Semester
-1. Sebuah situs web telah dideploy sebelumnya dan memiliki backend yang mampu menampilkan data dalam format JSON. Ini berarti bahwa situs web tersebut sudah memiliki kemampuan untuk mengeluarkan data dalam bentuk JSON
-2. Dalam direktori utils, sebuah berkas baru dengan nama fetch.dart dibuat untuk melakukan proses pengambilan data secara asinkron. Hal ini memungkinkan aplikasi untuk mengambil data dari backend dengan cara yang efisien
-3. Di dalam berkas fetch.dart, terdapat sebuah fungsi yang dapat dipanggil dari luar berkas dan berfungsi untuk mengembalikan data dalam bentuk daftar. Fungsi ini akan menjadi jembatan antara aplikasi dan backend untuk mengambil dan mengelola data yang dibutuhkan
-4. Fungsi ini juga memiliki URL yang digunakan sebagai endpoint untuk mengakses data JSON. Endpoint ini adalah alamat yang dituju oleh aplikasi untuk mendapatkan data dari backend.
-5. Pemanggilan fungsi ini dilakukan di dalam widget yang relevan, sehingga data tersebut dapat diolah sesuai dengan kebutuhan yang ada. Dengan demikian, data JSON yang diambil dapat digunakan dan ditampilkan dengan cara yang sesuai dalam tampilan aplikasi.
+1. Menambahkan depedensi `http` dengan menjalankan perintah `flutter pub add http` pada terminal proyek agar dapat digunakan untuk bertukar HTTP Request.
+2. Membuat model yang sesuai dengan respons JSON dari *web service*, kami menggunakan QuickType untuk membantu pembuatan model-model *app* kami (tercantum pada direktori models).
+3. Untuk menyesuaikan *return* yang dibutuhkan *app* yang dibuat, kami memodifikasi beberapa *views code web service* kami (proyek PTS Django).
+4. Data yang didapat kemudian diolah atau dipetakan ke dalam suatu struktur data, baik `Map` maupun `List`. Kemudian, data yang sudah dikonversi ke aplimasi ditampilkan melalui `FutureBuilder`.
 
 ## Tautan Berita Acara
-Berikut tautan berita acara kelompok D12 : https://docs.google.com/spreadsheets/d/172pyc2X2Ib8fZ6M8gB--YL7NuA5O4M92OxUJ01vpUAc/edit?usp=sharing
+Tautan berita acara kelompok D12 dapat diakses [disini](https://docs.google.com/spreadsheets/d/172pyc2X2Ib8fZ6M8gB--YL7NuA5O4M92OxUJ01vpUAc/edit?usp=sharing).

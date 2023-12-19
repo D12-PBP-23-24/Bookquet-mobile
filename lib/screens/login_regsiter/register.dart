@@ -295,7 +295,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 if (_formKey.currentState!.validate()) {
                                   // Submit to Django server and wait for response
                                   final response = await request.postJson(
-                                      "https://127.0.0.1:8000/auth/register/",
+                                      "https://bookquet-d12-tk.pbp.cs.ui.ac.id/auth/register/",
                                       convert.jsonEncode(<String, String>{
                                         'username': username,
                                         'password': password,

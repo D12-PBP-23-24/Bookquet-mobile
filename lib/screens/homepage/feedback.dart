@@ -40,7 +40,7 @@ class _FeedbackListState extends State<FeedbackList> {
 
   Future<void> fetchData() async {
     final response = await http.get
-      (Uri.parse('http://127.0.0.1:8000/feedback/'),
+      (Uri.parse('https://bookquet-d12-tk.pbp.cs.ui.ac.id/feedback/'),
       headers: {"Content-Type": "application/json"},
     );
 
@@ -173,7 +173,7 @@ class _FeedbackListState extends State<FeedbackList> {
   }
 
   Future<void> deleteFeedback(int feedbackId) async {
-    final response = await http.delete(Uri.parse('http://127.0.0.1:8000/feedback/delete/$feedbackId'));
+    final response = await http.delete(Uri.parse('https://bookquet-d12-tk.pbp.cs.ui.ac.id/feedback/delete/$feedbackId'));
 
     if (response.statusCode == 204) {
       // Jika penghapusan berhasil, refresh data
@@ -202,7 +202,7 @@ class _FeedbackListState extends State<FeedbackList> {
 
   Future<void> addFeedback(CookieRequest request, BuildContext context) async {
     final response = await request.post(
-      ('http://127.0.0.1:8000/feedback/add/'),
+      ('https://bookquet-d12-tk.pbp.cs.ui.ac.id/feedback/add/'),
       {'comment': commentController.text},
     );
 
