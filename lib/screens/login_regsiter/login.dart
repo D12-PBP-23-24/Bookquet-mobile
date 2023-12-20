@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:bookquet_mobile/main.dart';
-import 'package:bookquet_mobile/screens/login_regsiter/register.dart';
 import 'package:bookquet_mobile/pbp_django_auth.dart';
 
 void main() {
@@ -39,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
+    final request = context.read<CookieRequest>();
     return Scaffold(
       backgroundColor: const Color(0xffe4fef3),
       appBar: AppBar(
