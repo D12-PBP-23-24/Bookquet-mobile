@@ -244,21 +244,10 @@ class _HomepageState extends State<Homepage> {
             builder: (context, AsyncSnapshot<List<Book>> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
-              // } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              //   return const Center(
-              //     child: Text(
-              //       "Tidak ada buku.",
-              //       style: TextStyle(
-              //         color: Colors.green,
-              //         fontSize: 20,
-              //         fontFamily: 'Montserrat',
-              //       ),
-              //     ),
-              //   );
-              } else if (!snapshot.hasData) {
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                 return const Center(
                   child: Text(
-                    "Tidak ada buku.",
+                    "William pargoy.",
                     style: TextStyle(
                       color: Colors.green,
                       fontSize: 20,
