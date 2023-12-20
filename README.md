@@ -1,6 +1,6 @@
 # 📕 Bookquet Mobile 💐
 ![Build status](https://build.appcenter.ms/v0.1/apps/17748249-cdc9-48b7-9df3-2a52844a0cda/branches/main/badge)
-\n
+
 \~ Di setiap buku, terdapat karangan kata-kata berbunga \~
 
 > "If you don’t like to read, you haven’t found the right book." – **J.K. Rowling**
