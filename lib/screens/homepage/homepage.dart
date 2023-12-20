@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:bookquet_mobile/pbp_django_auth.dart';
 import 'package:bookquet_mobile/screens/homepage/feedback.dart';
 import 'package:bookquet_mobile/screens/read_later/priority_selection.dart';
 import 'package:bookquet_mobile/models/book.dart';
@@ -16,6 +18,7 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   late TextEditingController _searchController;
   late Future<List<Book>> _booksFuture;
+  late CookieRequest request;
   String _selectedGenre = 'All';
 
   final List<Map<String, String>> _genreChoices = [
@@ -37,18 +40,23 @@ class _HomepageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
+    request = context.read<CookieRequest>();
     _searchController = TextEditingController();
     _booksFuture = fetchBook();
+
+    // _booksFuture.then((value) => print(value));
   }
 
   Future<List<Book>> fetchBook() async {
     var url = Uri.parse('https://bookquet-d12-tk.pbp.cs.ui.ac.id/get-book');
-    var response = await http.get(
-      url,
-      headers: {"Content-Type": "application/json"},
-    );
+    // var response = await http.get(
+    //   url,
+    //   headers: {"Content-Type": "application/json"},
+    // );
+    var response = await request.get('https://bookquet-d12-tk.pbp.cs.ui.ac.id/get-book');
 
-    var data = jsonDecode(utf8.decode(response.bodyBytes));
+    // var data = jsonDecode(utf8.decode(response.bodyBytes));
+    var data = response;
     // print(data);
 
     List<Book> books = [];

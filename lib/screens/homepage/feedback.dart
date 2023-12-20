@@ -39,19 +39,24 @@ class _FeedbackListState extends State<FeedbackList> {
   }
 
   Future<void> fetchData() async {
-    final response = await http.get
-      (Uri.parse('https://bookquet-d12-tk.pbp.cs.ui.ac.id/feedback/'),
-      headers: {"Content-Type": "application/json"},
-    );
+    // final response = await http.get
+    //   (Uri.parse('https://bookquet-d12-tk.pbp.cs.ui.ac.id/feedback/'),
+    //   headers: {"Content-Type": "application/json"},
+    // );
+    final response = await request.get('https://bookquet-d12-tk.pbp.cs.ui.ac.id/feedback/');
+    // final response = await request.get('http://127.0.0.1:8000/feedback/');
+    // print(request);
 
-    if (response.statusCode == 200) {
-      setState(() {
-        feedbacks = List<Map<String, dynamic>>.from(json.decode(response.body)['feedbacks']);
-        feedbacks.sort((a, b) => b['id'].compareTo(a['id']));
-      });
-    } else {
-      throw Exception('Failed to load feedback');
-    }
+    // if (response.statusCode == 200) {
+    setState(() {
+      // feedbacks = List<Map<String, dynamic>>.from(json.decode(response.body)['feedbacks']);
+      // print(response);
+      feedbacks = List<Map<String, dynamic>>.from(response['feedbacks']);
+      feedbacks.sort((a, b) => b['id'].compareTo(a['id']));
+    });
+    // } else {
+    //   throw Exception('Failed to load feedback');
+    // }
   }
 
   @override
@@ -145,20 +150,21 @@ class _FeedbackListState extends State<FeedbackList> {
               padding: const EdgeInsets.only(left: 16.0, right: 16.0),
               itemCount: feedbacks.length,
               itemBuilder: (context, index) {
-                bool isCurrentUser = feedbacks[index]['user'] == request.jsonData['username'];
+                // bool isCurrentUser = feedbacks[index]['user'] == request.jsonData['username'];
                 return Container(
                   margin: const EdgeInsets.only(bottom: 8.0),
                   child: ListTile(
                     title: Text(feedbacks[index]['comment']),
-                    subtitle: Text('${feedbacks[index]['user']}' ' - ' '${feedbacks[index]['timestamp']}'),
+                    // subtitle: Text('${feedbacks[index]['user']}' ' - ' '${feedbacks[index]['timestamp']}'),
+                    subtitle: Text('${feedbacks[index]['timestamp']}'),
                     leading: const Icon(Icons.person),
-                    trailing: isCurrentUser ? IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () {
-                        deleteFeedback(feedbacks[index]['id']);
-                      },
-                    ) : null,
-                    tileColor: isCurrentUser ? Colors.green.shade50 : null,
+                    // trailing: isCurrentUser ? IconButton(
+                    //   icon: const Icon(Icons.delete),
+                    //   onPressed: () {
+                    //     deleteFeedback(feedbacks[index]['id']);
+                    //   },
+                    // ) : null,
+                    // tileColor: isCurrentUser ? Colors.green.shade50 : null,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -173,37 +179,40 @@ class _FeedbackListState extends State<FeedbackList> {
   }
 
   Future<void> deleteFeedback(int feedbackId) async {
-    final response = await http.delete(Uri.parse('https://bookquet-d12-tk.pbp.cs.ui.ac.id/feedback/delete/$feedbackId'));
+    // final response = await http.delete(Uri.parse('https://bookquet-d12-tk.pbp.cs.ui.ac.id/feedback/delete/$feedbackId'));
+    final response = await request.delete('https://bookquet-d12-tk.pbp.cs.ui.ac.id/feedback/delete/$feedbackId');
+    // final response = await request.delete('http://127.0.0.1:8000/feedback/delete/$feedbackId');
 
-    if (response.statusCode == 204) {
+    // if (response.statusCode == 204) {
       // Jika penghapusan berhasil, refresh data
       fetchData();
-    } else {
-      // Tampilkan pesan error jika penghapusan gagal
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Error'),
-            content: Text('Failed to delete feedback'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('OK'),
-              ),
-            ],
-          );
-        },
-      );
-    }
+    // } else {
+    //   // Tampilkan pesan error jika penghapusan gagal
+    //   showDialog(
+    //     context: context,
+    //     builder: (BuildContext context) {
+    //       return AlertDialog(
+    //         title: Text('Error'),
+    //         content: Text('Failed to delete feedback'),
+    //         actions: [
+    //           TextButton(
+    //             onPressed: () {
+    //               Navigator.of(context).pop();
+    //             },
+    //             child: Text('OK'),
+    //           ),
+    //         ],
+    //       );
+    //     },
+    //   );
+    // }
   }
 
   Future<void> addFeedback(CookieRequest request, BuildContext context) async {
-    print(request.jsonData['username']);
+    // print(request.jsonData['username']);
     final response = await request.post(
       ('https://bookquet-d12-tk.pbp.cs.ui.ac.id/feedback/add/'),
+      // ('http://127.0.0.1:8000/feedback/add/'),
       {'comment': commentController.text},
     );
 
