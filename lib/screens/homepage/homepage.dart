@@ -43,21 +43,13 @@ class _HomepageState extends State<Homepage> {
     request = context.read<CookieRequest>();
     _searchController = TextEditingController();
     _booksFuture = fetchBook();
-
-    // _booksFuture.then((value) => print(value));
   }
 
   Future<List<Book>> fetchBook() async {
     var url = Uri.parse('https://bookquet-d12-tk.pbp.cs.ui.ac.id/get-book');
-    // var response = await http.get(
-    //   url,
-    //   headers: {"Content-Type": "application/json"},
-    // );
     var response = await request.get('https://bookquet-d12-tk.pbp.cs.ui.ac.id/get-book');
 
-    // var data = jsonDecode(utf8.decode(response.bodyBytes));
     var data = response;
-    // print(data);
 
     List<Book> books = [];
     for (var i in data) {
@@ -68,14 +60,6 @@ class _HomepageState extends State<Homepage> {
 
     return books;
   }
-
-  Future<void> _refreshBooks() async {
-    setState(() {
-      _booksFuture = fetchBook();
-    });
-    await _booksFuture;
-  }
-
 
   List<Book> _searchBooks(String query, List<Book> books) {
     return books.where((book) {
@@ -260,7 +244,18 @@ class _HomepageState extends State<Homepage> {
             builder: (context, AsyncSnapshot<List<Book>> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
-              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              // } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              //   return const Center(
+              //     child: Text(
+              //       "Tidak ada buku.",
+              //       style: TextStyle(
+              //         color: Colors.green,
+              //         fontSize: 20,
+              //         fontFamily: 'Montserrat',
+              //       ),
+              //     ),
+              //   );
+              } else if (!snapshot.hasData) {
                 return const Center(
                   child: Text(
                     "Tidak ada buku.",
@@ -308,7 +303,6 @@ class _HomepageState extends State<Homepage> {
                                 ReviewPage(bookId: filteredBooks[index].pk),
                           ),
                         );
-                        await _refreshBooks();
                       },
                       child: Card(
                         child: Padding(
