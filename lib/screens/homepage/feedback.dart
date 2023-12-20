@@ -150,21 +150,21 @@ class _FeedbackListState extends State<FeedbackList> {
               padding: const EdgeInsets.only(left: 16.0, right: 16.0),
               itemCount: feedbacks.length,
               itemBuilder: (context, index) {
-                // bool isCurrentUser = feedbacks[index]['user'] == request.jsonData['username'];
+                bool isCurrentUser = feedbacks[index]['user'] == request.jsonData['username'];
                 return Container(
                   margin: const EdgeInsets.only(bottom: 8.0),
                   child: ListTile(
                     title: Text(feedbacks[index]['comment']),
-                    // subtitle: Text('${feedbacks[index]['user']}' ' - ' '${feedbacks[index]['timestamp']}'),
-                    subtitle: Text('${feedbacks[index]['timestamp']}'),
+                    subtitle: Text('${feedbacks[index]['user']}' ' - ' '${feedbacks[index]['timestamp']}'),
+                    // subtitle: Text('${feedbacks[index]['timestamp']}'),
                     leading: const Icon(Icons.person),
-                    // trailing: isCurrentUser ? IconButton(
-                    //   icon: const Icon(Icons.delete),
-                    //   onPressed: () {
-                    //     deleteFeedback(feedbacks[index]['id']);
-                    //   },
-                    // ) : null,
-                    // tileColor: isCurrentUser ? Colors.green.shade50 : null,
+                    trailing: isCurrentUser ? IconButton(
+                      icon: const Icon(Icons.delete),
+                      onPressed: () {
+                        deleteFeedback(feedbacks[index]['id']);
+                      },
+                    ) : null,
+                    tileColor: isCurrentUser ? Colors.green.shade50 : null,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -213,7 +213,7 @@ class _FeedbackListState extends State<FeedbackList> {
     final response = await request.post(
       ('https://bookquet-d12-tk.pbp.cs.ui.ac.id/feedback/add/'),
       // ('http://127.0.0.1:8000/feedback/add/'),
-      {'comment': commentController.text},
+      {'comment': commentController.text, 'user': request.jsonData['username']},
     );
 
     if (response['status'] == 200) {
