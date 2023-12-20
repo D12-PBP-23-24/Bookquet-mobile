@@ -243,7 +243,7 @@ class _HomepageState extends State<Homepage> {
             future: _booksFuture,
             builder: (context, AsyncSnapshot<List<Book>> snapshot) {
               // print(snapshot.data);
-              if (snapshot.connectionState == ConnectionState.waiting) {
+              if (snapshot.data == null) {
                 return const Center(child: CircularProgressIndicator());
               // } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
               // } else if (snapshot.data == null) {
