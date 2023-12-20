@@ -242,19 +242,21 @@ class _HomepageState extends State<Homepage> {
           FutureBuilder(
             future: _booksFuture,
             builder: (context, AsyncSnapshot<List<Book>> snapshot) {
+              // print(snapshot.data);
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
-              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return const Center(
-                  child: Text(
-                    "William pargoy.",
-                    style: TextStyle(
-                      color: Colors.green,
-                      fontSize: 20,
-                      fontFamily: 'Montserrat',
-                    ),
-                  ),
-                );
+              // } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              // } else if (snapshot.data == null) {
+              //   return const Center(
+              //     child: Text(
+              //       "Tidak ada buku.",
+              //       style: TextStyle(
+              //         color: Colors.green,
+              //         fontSize: 20,
+              //         fontFamily: 'Montserrat',
+              //       ),
+              //     ),
+              //   );
               } 
               else {
                 List<Book> filteredBooks = _searchBooks(_searchController.text, snapshot.data!);
