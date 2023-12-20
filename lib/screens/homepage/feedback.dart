@@ -179,8 +179,9 @@ class _FeedbackListState extends State<FeedbackList> {
   }
 
   Future<void> deleteFeedback(int feedbackId) async {
-    // final response = await http.delete(Uri.parse('https://bookquet-d12-tk.pbp.cs.ui.ac.id/feedback/delete/$feedbackId'));
-    final response = await request.delete('https://bookquet-d12-tk.pbp.cs.ui.ac.id/feedback/delete/$feedbackId');
+    final response = await http.delete(Uri.parse('https://bookquet-d12-tk.pbp.cs.ui.ac.id/feedback/delete/$feedbackId'));
+    // final response = await request.delete('https://bookquet-d12-tk.pbp.cs.ui.ac.id/feedback/delete/$feedbackId');
+    // final response = await http.delete(Uri.parse('http://127.0.0.1:8000/feedback/delete/$feedbackId'));
     // final response = await request.delete('http://127.0.0.1:8000/feedback/delete/$feedbackId');
 
     // if (response.statusCode == 204) {

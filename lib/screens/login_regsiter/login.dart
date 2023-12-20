@@ -209,7 +209,8 @@ class _LoginPageState extends State<LoginPage> {
   }
   
   void _launchWebsite() async {
-    const url = 'https://bookquet-d12-tk.pbp.cs.ui.ac.id/register/'; // Replace with your website URL
+    const url = 'https://bookquet-d12-tk.pbp.cs.ui.ac.id/register/';
+    // const url = 'http://127.0.0.1:8000/register/'; // Replace with your website URL
     if (await canLaunch(url)) {
       await launch(url);
     } else {
