@@ -36,11 +36,11 @@ class Fields {
     String title;
     String author;
     String description;
-    int isbn;
+    String isbn;
     String genres;
     String coverImg;
     int year;
-    int averageRate;
+    double averageRate;
     int userRated;
     List<int> favorites;
 
@@ -61,7 +61,7 @@ class Fields {
         title: json["title"],
         author: json["author"],
         description: json["description"],
-        isbn: json["isbn"],
+        isbn: json["isbn"].toString(),
         genres: json["genres"],
         coverImg: json["cover_img"],
         year: json["year"],

@@ -26,7 +26,7 @@ Berikut ini adalah daftar modul yang akan kami implementasikan beserta pengemban
  
 | Modul | Penjelasan | Pengembang |
 | -- | -- | -- |
-| **Authentication** | Pengguna pada aplikasi Flutter ini dapat melakukan login dan logout (registrasi dilakukan di *web service* Django). Akun user yang sudah terdaftar di Django bisa melakukan login melalui aplikasi Bookquet Mobile di Flutter | Carissa |
+| **Authentication** | Pengguna aplikasi dapat melakukan register, login, dan logout akun (dengan mekanisme proses registrasi akan di-*redirect* ke *web service* Django secara *asynchronus*). Akun user yang sudah terdaftar di Django bisa melakukan login melalui aplikasi Bookquet Mobile di Flutter | Carissa |
 | **User Dashboard** | Menampilkan informasi pribadi pengguna yang sudah login (informasi user dari pembuatan akun). Pengguna juga dapat meng-edit data pribadinya. | Farah |.
 | **Homepage** | Menampilkan halaman utama berupa daftar buku. Pengguna disambut dengan *hero block* dan daftar buku dibawahnya. Setiap buku ditampilkan menggunakan *card* yang memberikan informasi berupa judul, *genre*, *author*, tahun terbit, dan *rate*. Pengguna bisa menggunakan fitur *filter* dan *search* untuk mencari buku berdasarkan *genre*, judul, atau *author*. Pengguna juga bisa menambahkan *feedback* terhadap aplikasi yang digunakan pada tombol `Berikan Feedback` |
 | **Book Preview, Rate & Review**| Menampilkan informasi suatu buku seperti sinopsis, pengarang, judul, rating buku, genre dan lain-lain. Pengguna dapat memberikan ulasan (komentar) dan rating (bintang dengan rentang 1-5), jika User sudah pernah melakukan rating, maka rating terbaru akan memperbarui rating lama. Pada aplikasi ini, pengguna dapat melihat komentar beragam user (ditampilkan terbatas). | William |

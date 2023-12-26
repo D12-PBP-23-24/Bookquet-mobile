@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:bookquet_mobile/pbp_django_auth.dart';
 import 'package:bookquet_mobile/screens/homepage/feedback.dart';
@@ -46,18 +44,14 @@ class _HomepageState extends State<Homepage> {
   }
 
   Future<List<Book>> fetchBook() async {
-    var url = Uri.parse('https://bookquet-d12-tk.pbp.cs.ui.ac.id/get-book');
-    var response = await request.get('https://bookquet-d12-tk.pbp.cs.ui.ac.id/get-book');
-
-    var data = response;
+    var response = await request.get('https://bookquet-d12-tk.pbp.cs.ui.ac.id/api/books');
 
     List<Book> books = [];
-    for (var i in data) {
+    for (var i in response) {
       if (i != null) {
         books.add(Book.fromJson(i));
       }
     }
-
     return books;
   }
 
@@ -73,8 +67,7 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-      child: Column(
+      body: ListView(
         children: [
 
           // Hero Block
@@ -115,7 +108,7 @@ class _HomepageState extends State<Homepage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => FeedbackList(),
+                        builder: (context) => const FeedbackList(),
                       ),
                     );
                   },
@@ -239,147 +232,127 @@ class _HomepageState extends State<Homepage> {
               ),
             ),
           ),
+          
           FutureBuilder(
             future: _booksFuture,
             builder: (context, AsyncSnapshot<List<Book>> snapshot) {
-              // print(snapshot.data);
-              if (snapshot.data == null) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
-              // } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              // } else if (snapshot.data == null) {
-              //   return const Center(
-              //     child: Text(
-              //       "Tidak ada buku.",
-              //       style: TextStyle(
-              //         color: Colors.green,
-              //         fontSize: 20,
-              //         fontFamily: 'Montserrat',
-              //       ),
-              //     ),
-              //   );
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return const Center(
+                  child: Text(
+                    "Tidak ada buku.",
+                    style: TextStyle(
+                      color: Colors.green,
+                      fontSize: 20,
+                      fontFamily: 'Montserrat',
+                    ),
+                  ),
+                );
               } 
               else {
                 List<Book> filteredBooks = _searchBooks(_searchController.text, snapshot.data!);
-                return SizedBox(
-                  height: (filteredBooks.length == 1) ? filteredBooks.length * 500 : filteredBooks.length * 250,
-                  child: GridView.builder(
-                  padding: const EdgeInsets.all(16.0),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 8.0,
-                    mainAxisSpacing: 8.0,
-                    mainAxisExtent: 500,
-                  ),
-                  itemCount: filteredBooks.length,
-                  itemBuilder: (context, index) {
-                    // int filledStars = filteredBooks[index].fields.averageRate.round();
-                    // int emptyStars = 5 - filledStars;
-
-                    // List<Widget> starIcons = List.generate(
-                    //   filledStars,
-                    //   (index) => const Icon(Icons.star),
-                    // );
-
-                    // List<Widget> borderStarIcons = List.generate(
-                    //   emptyStars,
-                    //   (index) => const Icon(Icons.star_border),
-                    // );
-
-                    return InkWell(
-                      onTap: () async {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                ReviewPage(bookId: filteredBooks[index].pk),
-                          ),
-                        );
-                      },
-                      child: Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            children: [
-                              // Row(
-                              //   mainAxisAlignment: MainAxisAlignment.center,
-                              //   children: [
-                              //     ...starIcons,
-                              //     ...borderStarIcons,
-                              //   ],
-                              // ),
-                              const SizedBox(height: 8.0),
-                              Expanded(
-                                child: Image.network(
-                                  filteredBooks[index].fields.coverImg,
-                                  fit: BoxFit.fitWidth,
-                                ),
-                              ),
-                              ListTile(
-                                title: Text(
-                                  filteredBooks[index].fields.title,
-                                  style: const TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Montserrat'),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
-                                ),
-                                subtitle: Text(
-                                  filteredBooks[index].fields.author,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
-                                ),
-                              ),
-                              ListTile(
-                                leading: Text(
-                                  filteredBooks[index].fields.genres,
-                                  style: const TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Montserrat'),
-                                ),
-                                trailing: Text(
-                                  filteredBooks[index].fields.year.toString(),
-                                  style: const TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Montserrat'),
-                                ),
-                              ),
-                              const SizedBox(height: 8.0),
-                              ElevatedButton(
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green.shade800),
-                                  foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                                  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0)),
-                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                  ),
-                                
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => PrioritySelectionScreen(bookId: filteredBooks[index].pk),
-                                    ),
-                                  );
-                                },
-                                child: const Text(
-                                  "Read Later",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: 'Montserrat',
+                return Container(
+                  child: SizedBox(
+                    height: (filteredBooks.length == 1) ? filteredBooks.length * 500 : filteredBooks.length * 250,
+                    child: GridView.builder(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.all(16.0),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 8.0,
+                      mainAxisExtent: 500,
+                    ),
+                    itemCount: filteredBooks.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () async {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ReviewPage(bookId: filteredBooks[index].pk),
+                            ),
+                          );
+                        },
+                        child: Card(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 8.0),
+                                Expanded(
+                                  child: Image.network(
+                                    filteredBooks[index].fields.coverImg,
+                                    fit: BoxFit.fitWidth,
                                   ),
                                 ),
-                              ),
-                            ],
+                                ListTile(
+                                  title: Text(
+                                    filteredBooks[index].fields.title,
+                                    style: const TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Montserrat'),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                  ),
+                                  subtitle: Text(
+                                    filteredBooks[index].fields.author,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                  ),
+                                ),
+                                ListTile(
+                                  leading: Text(
+                                    filteredBooks[index].fields.genres,
+                                    style: const TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Montserrat', overflow: TextOverflow.ellipsis,),
+                                  ),
+                                  trailing: Text(
+                                    filteredBooks[index].fields.year.toString(),
+                                    style: const TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Montserrat', overflow: TextOverflow.ellipsis,),
+                                  ),
+                                ),
+                                const SizedBox(height: 8.0),
+                                ElevatedButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all<Color>(Colors.green.shade800),
+                                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0)),
+                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10.0),
+                                      ),
+                                    ),
+                                  
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => PrioritySelectionScreen(bookId: filteredBooks[index].pk),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text(
+                                    "Read Later",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'Montserrat',
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                ),
+                      );
+                    },
+                  ),
+                  ),
                 );
               }
             },
           ),
         ],
       ),
-    ),
     );
   }
 }

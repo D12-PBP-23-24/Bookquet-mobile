@@ -178,12 +178,6 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(height: 15),
                         ElevatedButton(
                           onPressed: _launchWebsite,
-                          // onPressed: () async {
-                          //   Navigator.push(
-                          //     context, 
-                          //     MaterialPageRoute(builder: (context) => RegisterPage())
-                          //   );
-                          // },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blue.shade300, // Warna tombol
                           ),

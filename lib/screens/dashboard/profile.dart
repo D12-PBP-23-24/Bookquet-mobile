@@ -53,10 +53,10 @@ Widget build(BuildContext context) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return Center(
+                return const Center(
                   child: Text(
                     "Tidak ada data profile.",
-                    style: TextStyle(color: const Color(0xff59A5D8), fontSize: 20),
+                    style: TextStyle(color: Color(0xff59A5D8), fontSize: 20),
                   ),
                 );
               } else {
