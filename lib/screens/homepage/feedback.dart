@@ -170,8 +170,15 @@ class _FeedbackListState extends State<FeedbackList> {
   }
 
   Future<void> deleteFeedback(int feedbackId) async {
-    final response = await http.delete(Uri.parse('https://bookquet-d12-tk.pbp.cs.ui.ac.id/feedback/delete/$feedbackId'));
-    fetchData();
+    final response = await http.delete(Uri.parse('https://bookquet-d12-tk.pbp.cs.ui.ac.id/feedback/delete/$feedbackId/'));
+
+    if (response.statusCode == 204) {
+      fetchData();
+    } else if (response.statusCode == 404) {
+      print('Feedback not found');
+    } else {
+      print('Failed to delete feedback. Status code: ${response.statusCode}');
+    }
   }
 
   Future<void> addFeedback(CookieRequest request, BuildContext context) async {

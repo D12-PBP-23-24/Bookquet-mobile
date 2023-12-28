@@ -44,7 +44,8 @@ class _HomepageState extends State<Homepage> {
   }
 
   Future<List<Book>> fetchBook() async {
-    var response = await request.get('https://bookquet-d12-tk.pbp.cs.ui.ac.id/api/books');
+    var response =
+        await request.get('https://bookquet-d12-tk.pbp.cs.ui.ac.id/api/books');
 
     List<Book> books = [];
     for (var i in response) {
@@ -58,8 +59,9 @@ class _HomepageState extends State<Homepage> {
   List<Book> _searchBooks(String query, List<Book> books) {
     return books.where((book) {
       return (book.fields.title.toLowerCase().contains(query.toLowerCase()) ||
-          book.fields.author.toLowerCase().contains(query.toLowerCase())) &&
-          (_selectedGenre == 'All' || book.fields.genres.contains(_selectedGenre));
+              book.fields.author.toLowerCase().contains(query.toLowerCase())) &&
+          (_selectedGenre == 'All' ||
+              book.fields.genres.contains(_selectedGenre));
     }).toList();
   }
 
@@ -67,198 +69,208 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: ListView(
-        children: [
-
-          // Hero Block
-          Container(
-            color: const Color(0xffe4fef3),
-            padding: const EdgeInsets.all(24.0),
-            width: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Column(
               children: [
-                const Text(
-                  'Bookquet',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.w800,
-                    fontFamily: 'Montserrat',
-                  ),
-                ),
-                const SizedBox(height: 8.0),
-                const Text(
-                  'Di setiap buku, terdapat karangan kata-kata berbunga!',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontFamily: 'Montserrat',
-                  ),
-                ),
-                const SizedBox(height: 16.0),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green.shade800,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const FeedbackList(),
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    "Berikan Feedback",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w300,
-                      fontFamily: 'Montserrat',
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          // Search Bar dan Dropdown Bar
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color(0xffe4fef3),
-                  Colors.white,
-                ],
-              ),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 24.0, top: 8.0, bottom: 8.0, right: 8.0),
-                    decoration: BoxDecoration(
-                      color: Colors.green.shade800,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: TextField(
-                      style: const TextStyle(
-                        color: Colors.white, 
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w300,
-                      ),
-                      controller: _searchController,
-                      decoration: const InputDecoration(
-                        hintText: 'Cari buku disini!',
-                        hintStyle: TextStyle(
-                          color: Colors.white, 
-                          fontFamily: 'Montserrat', 
-                          fontWeight: FontWeight.w300,
-                        ),
-                        prefixIcon: Icon(Icons.search, color: Colors.white),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
+                // Hero Block
+                Container(
+                  color: const Color(0xffe4fef3),
+                  padding: const EdgeInsets.all(24.0),
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Bookquet',
+                        style: TextStyle(
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.w800,
+                          fontFamily: 'Montserrat',
                         ),
                       ),
-                      onChanged: (query) {
-                        setState(() {
-                          _booksFuture = fetchBook();
-                        });
-                      },
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    margin: const EdgeInsets.only(right: 24.0, top: 8.0, bottom: 8.0),
-                    padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                    decoration: BoxDecoration(
-                      color: Colors.green.shade800,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                      isExpanded: true, 
-                        iconEnabledColor: Colors.white,
-                        focusColor: Colors.white,
-                        dropdownColor: Colors.green.shade800,
-                        value: _selectedGenre,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedGenre = newValue!;
-                            _booksFuture = fetchBook();
-                          });
-                        },
-                        items: _genreChoices.map<DropdownMenuItem<String>>((Map<String, String> genre) {
-                          return DropdownMenuItem<String>(
-                            value: genre['value']!,
-                            child: Text(
-                              genre['label']!,
-                              style: const TextStyle(
-                                color: Colors.white, 
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w300,
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                      const SizedBox(height: 8.0),
+                      const Text(
+                        'Di setiap buku, terdapat karangan kata-kata berbunga!',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontFamily: 'Montserrat',
+                        ),
+                      ),
+                      const SizedBox(height: 16.0),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green.shade800,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 32.0, vertical: 16.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const FeedbackList(),
                             ),
                           );
-                        }).toList(),
+                        },
+                        child: const Text(
+                          "Berikan Feedback",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w300,
+                            fontFamily: 'Montserrat',
+                          ),
+                        ),
                       ),
-                    )
+                    ],
+                  ),
+                ),
+
+                // Search Bar dan Dropdown Bar
+                Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Color(0xffe4fef3),
+                        Colors.white,
+                      ],
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                              left: 24.0, top: 8.0, bottom: 8.0, right: 8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.green.shade800,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: TextField(
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w300,
+                            ),
+                            controller: _searchController,
+                            decoration: const InputDecoration(
+                              hintText: 'Cari buku disini!',
+                              hintStyle: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w300,
+                              ),
+                              prefixIcon:
+                                  Icon(Icons.search, color: Colors.white),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
+                            ),
+                            onChanged: (query) {
+                              setState(() {
+                                _booksFuture = fetchBook();
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                            margin: const EdgeInsets.only(
+                                right: 24.0, top: 8.0, bottom: 8.0),
+                            padding:
+                                const EdgeInsets.only(left: 16.0, right: 16.0),
+                            decoration: BoxDecoration(
+                              color: Colors.green.shade800,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                isExpanded: true,
+                                iconEnabledColor: Colors.white,
+                                focusColor: Colors.white,
+                                dropdownColor: Colors.green.shade800,
+                                value: _selectedGenre,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    _selectedGenre = newValue!;
+                                    _booksFuture = fetchBook();
+                                  });
+                                },
+                                items: _genreChoices
+                                    .map<DropdownMenuItem<String>>(
+                                        (Map<String, String> genre) {
+                                  return DropdownMenuItem<String>(
+                                    value: genre['value']!,
+                                    child: Text(
+                                      genre['label']!,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Montserrat',
+                                        fontWeight: FontWeight.w300,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            )),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Daftar Buku
+                const SizedBox(height: 16.0),
+                const Center(
+                  child: Text(
+                    'Daftar Buku',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Montserrat',
+                    ),
                   ),
                 ),
               ],
             ),
-          ),
-
-          // Daftar Buku
-          const SizedBox(height: 16.0),
-          const Center(
-            child: Text(
-              'Daftar Buku',
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Montserrat',
-              ),
-            ),
-          ),
-          
-          FutureBuilder(
-            future: _booksFuture,
-            builder: (context, AsyncSnapshot<List<Book>> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return const Center(
-                  child: Text(
-                    "Tidak ada buku.",
-                    style: TextStyle(
-                      color: Colors.green,
-                      fontSize: 20,
-                      fontFamily: 'Montserrat',
+            FutureBuilder(
+              future: _booksFuture,
+              builder: (context, AsyncSnapshot<List<Book>> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(
+                    child: Text(
+                      "Tidak ada buku.",
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontSize: 20,
+                        fontFamily: 'Montserrat',
+                      ),
                     ),
-                  ),
-                );
-              } 
-              else {
-                List<Book> filteredBooks = _searchBooks(_searchController.text, snapshot.data!);
-                return Container(
-                  child: SizedBox(
-                    height: (filteredBooks.length == 1) ? filteredBooks.length * 500 : filteredBooks.length * 250,
-                    child: GridView.builder(
+                  );
+                } else {
+                  List<Book> filteredBooks =
+                      _searchBooks(_searchController.text, snapshot.data!);
+                  return GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     padding: const EdgeInsets.all(16.0),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 8.0,
                       mainAxisExtent: 500,
@@ -290,7 +302,9 @@ class _HomepageState extends State<Homepage> {
                                 ListTile(
                                   title: Text(
                                     filteredBooks[index].fields.title,
-                                    style: const TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Montserrat'),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Montserrat'),
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,
                                   ),
@@ -303,31 +317,50 @@ class _HomepageState extends State<Homepage> {
                                 ListTile(
                                   leading: Text(
                                     filteredBooks[index].fields.genres,
-                                    style: const TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Montserrat', overflow: TextOverflow.ellipsis,),
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Montserrat',
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
                                   trailing: Text(
                                     filteredBooks[index].fields.year.toString(),
-                                    style: const TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Montserrat', overflow: TextOverflow.ellipsis,),
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Montserrat',
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(height: 8.0),
                                 ElevatedButton(
                                   style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all<Color>(Colors.green.shade800),
-                                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0)),
-                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.green.shade800),
+                                    foregroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.white),
+                                    padding: MaterialStateProperty.all<
+                                            EdgeInsetsGeometry>(
+                                        const EdgeInsets.symmetric(
+                                            horizontal: 32.0, vertical: 16.0)),
+                                    shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10.0),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
                                       ),
                                     ),
-                                  
                                   ),
                                   onPressed: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => PrioritySelectionScreen(bookId: filteredBooks[index].pk),
+                                        builder: (context) =>
+                                            PrioritySelectionScreen(
+                                                bookId:
+                                                    filteredBooks[index].pk),
                                       ),
                                     );
                                   },
@@ -345,13 +378,12 @@ class _HomepageState extends State<Homepage> {
                         ),
                       );
                     },
-                  ),
-                  ),
-                );
-              }
-            },
-          ),
-        ],
+                  );
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

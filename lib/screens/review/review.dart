@@ -209,22 +209,27 @@ class _ReviewPageState extends State<ReviewPage> {
                                         SizedBox(height: 16.0),
                                         Row(
                                           children: [
-                                            RichText(
+                                            Expanded(
+                                            child: RichText(
                                               text: TextSpan(
                                                 style:
                                                     DefaultTextStyle.of(context)
                                                         .style,
                                                 children: [
                                                   TextSpan(
-                                                    text: 'This Is The Title',
+                                                    text: data.book.title,
                                                     style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       fontSize: 24.0,
+                                                      overflow: TextOverflow
+                                                          .ellipsis,
+                                                      
                                                     ),
                                                   ),
                                                 ],
                                               ),
+                                            ),
                                             ),
                                             SizedBox(width: 8.0),
                                             Chip(
