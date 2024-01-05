@@ -7,6 +7,9 @@
 
 > Proyek ini dibuat untuk memenuhi tugas Proyek Akhir Semester (PAS) pada mata kuliah Pemrograman Berbasis Platform (CSGE602022) yang diselenggarakan oleh Fakultas Ilmu Komputer, Universitas Indonesia Tahun Ajaran 2023/2024 Semester Gasal.
 
+## Tautan Aplikasi
+Aplikasi Bookquet Mobile dapat diunduh [disini](https://install.appcenter.ms/orgs/PBP12/apps/Bookquet-mobile/distribution_groups/public).
+
 ## 👥 Anggota Kelompok
 Kami dari kelompok D-12 yang beranggotakan:
 | Nama | NPM | Github | 
@@ -26,16 +29,16 @@ Berikut ini adalah daftar modul yang akan kami implementasikan beserta pengemban
  
 | Modul | Penjelasan | Pengembang |
 | -- | -- | -- |
-| **Authentication** | Pengguna aplikasi dapat melakukan register, login, dan logout akun (dengan mekanisme proses registrasi akan di-*redirect* ke *web service* Django secara *asynchronus*). Akun user yang sudah terdaftar di Django bisa melakukan login melalui aplikasi Bookquet Mobile di Flutter | Carissa |
-| **User Dashboard** | Menampilkan informasi pribadi pengguna yang sudah login (informasi user dari pembuatan akun). Pengguna juga dapat meng-edit data pribadinya. | Farah |.
-| **Homepage** | Menampilkan halaman utama berupa daftar buku. Pengguna disambut dengan *hero block* dan daftar buku dibawahnya. Setiap buku ditampilkan menggunakan *card* yang memberikan informasi berupa judul, *genre*, *author*, tahun terbit, dan *rate*. Pengguna bisa menggunakan fitur *filter* dan *search* untuk mencari buku berdasarkan *genre*, judul, atau *author*. Pengguna juga bisa menambahkan *feedback* terhadap aplikasi yang digunakan pada tombol `Berikan Feedback` |
-| **Book Preview, Rate & Review**| Menampilkan informasi suatu buku seperti sinopsis, pengarang, judul, rating buku, genre dan lain-lain. Pengguna dapat memberikan ulasan (komentar) dan rating (bintang dengan rentang 1-5), jika User sudah pernah melakukan rating, maka rating terbaru akan memperbarui rating lama. Pada aplikasi ini, pengguna dapat melihat komentar beragam user (ditampilkan terbatas). | William |
-| **Read Later** | Pengguna dapat menambahkan suatu buku ke dalam daftar *read later* dengan 3 buah pilihan prioritas yaitu *low*, *medium*, dan *high*. Dalam halaman tampilan *read later*, terdapat 4 tombol yaitu *all*, *low*, *medium*, dan *high*, dimana jika dipencet maka halaman tersebut akan menampilkan buku yang memiliki prioritas tersebut (jika *priority* yang dipilih adalah *all*, akan menampilkan semua buku pada *read later*). Pengguna juga dapat menghapus sebuah buku dari *read later*. | Edbert |
+| **Authentication** | Pengguna aplikasi dapat melakukan *register*, *login*, dan *logout* akun (dengan mekanisme proses registrasi akan di-*redirect* ke *web service* Django secara *asynchronus*). Akun *user* yang sudah terdaftar di Django bisa melakukan *login* melalui aplikasi Bookquet Mobile di Flutter | Carissa |
+| **User Dashboard** | Menampilkan informasi pribadi pengguna yang sedang *login* (informasi *user* dari pembuatan akun). Pengguna juga dapat mengedit data pribadinya. | Farah |.
+| **Homepage** | Menampilkan halaman utama berupa daftar buku. Pengguna disambut dengan *hero block* dan daftar buku di bawahnya. Setiap buku ditampilkan menggunakan *card* yang memberikan informasi berupa judul, genre, *author*, dan tahun terbit. Pengguna bisa menggunakan fitur *filter* dan *search* untuk mencari buku berdasarkan genre, judul, atau *author*. Pengguna juga bisa menambahkan *feedback* terhadap aplikasi yang digunakan pada tombol `Berikan Feedback`. | Akmal |
+| **Book Preview, Rate & Review**| Menampilkan informasi suatu buku, seperti sinopsis, pengarang, judul buku, *rating* buku, genre, dan gambar sampul buku. Pengguna dapat memberikan ulasan (komentar) dan *rating* (bintang dengan rentang 1-5). Jika *user* sudah pernah melakukan *rating*, *rating* terbaru akan memperbarui *rating* lama yang diberikan sebelumba. Pada halaman ini, pengguna dapat melihat komentar beragam *user* (ditampilkan terbatas). | William |
+| **Read Later** | Pengguna dapat menambahkan suatu buku ke dalam daftar *read later* dengan tiga buah pilihan prioritas yaitu *low*, *medium*, dan *high*. Dalam halaman tampilan *read later*, terdapat empat tombol yaitu *all*, *low*, *medium*, dan *high*. Jika tombol tersebut ditekan, halaman akan menampilkan buku yang memiliki prioritas yang dipilih (jika *priority* yang dipilih adalah *all*, akan menampilkan semua buku pada *read later*). Pengguna dapat menghapus sebuah buku dari *read later*. Pengguna juga dapat meningkatkan prioritas dari suatu buku yang telah dimasukkan ke dalam daftar *read later*.  | Edbert |
 
 ## 🕵️ *Role* atau Peran Pengguna 
 #### 🔓 User yang Sudah Terautentikasi
 Menggunakan fitur aplikasi secara menyeluruh. Fitur yang disedaiakan yaitu:
-- Melakukan pencarian dan *filter* berdasarkan judul, *author*, atau *genre*.
+- Melakukan pencarian dan *filter* berdasarkan judul, *author*, atau genre.
 - Membuka halaman *profile* yang berisi data-data *user* terkait dan dapat mengeditnya.
 - Memberikan *review* dan *rating* ke buku yang dipilih.
 - Menambah dan menghapus buku pada daftar baca nanti (*read later*).
